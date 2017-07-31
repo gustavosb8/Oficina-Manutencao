@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/fragmentos :: referencias">
+	<title id="pageTitle" >Cadastro de Modelos</title>
+</head>
+<body>
+	
+	
+
+    <div class="panel panel-default body-size">
+    
+    	<div class="panel-heading">
+    		<div  th:replace="layout/fragmentos :: cabecalho"></div>
+        </div>
+        
+         <div data-th-replace="layout/fragmentos-mensagens :: mensagem-sucesso" ></div>
+        
+        <div class="panel panel-body">
+            <form class="form-horizontal" th:object="${modelo}" th:action="@{/modelos/save}" method="POST" style="margin: 10px">
+                
+                <div data-th-replace="layout/fragmentos-mensagens :: mensagem-erro-form"></div>
+                
+                <div class="form-group ">
+                    <fieldset class="filedset-body">
+                        <div class="form-group row">
+                           
+                        </div>                    
+                        <div class="form-group row">
+                            <div class="col-md-1">
+                                <input type="text" class="form-control input-sm" id="id_modelo" th:field="*{idModelo}" readOnly="readonly"/>
+                            </div>
+                        </div>
+                         
+                        <div class="form-group row">                                                          
+                            <div class="col-md-4 form-imput" >
+                                <label>Descrição</label>
+                                <textarea class="form-control input-sm" th:field="*{descModelo}" cols="5" rows="5" placeholder="Informe a descrição"></textarea>
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-group row">
+                            <div class="col-md-4 form-imput">
+                            	<label>Montadoras</label> 
+                                <select name="idMontadora" class="form-control">
+									<option data-th-each="montadora : ${MontadorasTodos}"
+									      	data-th-value="${montadora.idMontadora}" 
+									      	data-th-text="${montadora.descricaoMontadora}"></option>
+								</select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <div class="col-md-4 form-imput">
+                            	<label>Tipo de Veiculos</label> 
+                                <select name="idTipoVeiculo" class="form-control">
+									<option data-th-each="tipoVeiculo : ${TipoVeiculoTodos}"
+									      	data-th-value="${tipoVeiculo.idTipoVeiculo}" 
+									      	data-th-text="${tipoVeiculo.desc_tipoVeiculo}"></option>
+								</select>
+                            </div>
+                        </div>
+
+                                               
+                    </fieldset>
+                </div>
+                <div class="form-group row text-center">
+                    <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                    <a th:href="@{/modelos}" class="btn btn-sm btn-default">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

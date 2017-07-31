@@ -1,0 +1,346 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema bd_oficina
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema bd_oficina
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `bd_oficina` DEFAULT CHARACTER SET utf8 ;
+USE `bd_oficina` ;
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`FABRICANTE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`FABRICANTE` (
+  `ID_FABRICANTE` INT(11) NOT NULL AUTO_INCREMENT,
+  `DS_FABRICANTE` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID_FABRICANTE`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`MONTADORA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`MONTADORA` (
+  `ID_MONTADORA` SMALLINT(6) NOT NULL,
+  `DC_MONTADORA` VARCHAR(20) NULL DEFAULT NULL,
+  `DS_ORIGEM` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID_MONTADORA`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`LOJA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`LOJA` (
+  `ID_LOJA` SMALLINT(6) NOT NULL,
+  `DS_NOME` VARCHAR(20) NULL DEFAULT NULL,
+  `DS_ENDERECO` VARCHAR(60) NULL DEFAULT NULL,
+  `ID_MONTADORA` SMALLINT(6) NOT NULL,
+  PRIMARY KEY (`ID_LOJA`, `ID_MONTADORA`),
+  INDEX `fk_LOJA_MONTADORA_idx` (`ID_MONTADORA` ASC),
+  CONSTRAINT `fk_LOJA_MONTADORA`
+    FOREIGN KEY (`ID_MONTADORA`)
+    REFERENCES `bd_oficina`.`MONTADORA` (`ID_MONTADORA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`TIPO_VEICULO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`TIPO_VEICULO` (
+  `ID_TIPO_VEICULO` INT(11) NOT NULL,
+  `DS_TIPO_VEICULO` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID_TIPO_VEICULO`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`MODELO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`MODELO` (
+  `ID_MODELO` SMALLINT(6) NOT NULL,
+  `DS_MODELO` VARCHAR(20) NULL DEFAULT NULL,
+  `ID_MONTADORA` SMALLINT(6) NOT NULL,
+  `ID_TIPO_VEICULO` INT(11) NOT NULL,
+  PRIMARY KEY (`ID_MODELO`, `ID_MONTADORA`, `ID_TIPO_VEICULO`),
+  INDEX `fk_MODELO_TIPO_VEICULO_idx` (`ID_TIPO_VEICULO` ASC),
+  INDEX `fk_MODELO_MONTADORA_idx` (`ID_MONTADORA` ASC),
+  CONSTRAINT `fk_MODELO_TIPO_VEICULO`
+    FOREIGN KEY (`ID_TIPO_VEICULO`)
+    REFERENCES `bd_oficina`.`TIPO_VEICULO` (`ID_TIPO_VEICULO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MODELO_MONTADORA`
+    FOREIGN KEY (`ID_MONTADORA`)
+    REFERENCES `bd_oficina`.`MONTADORA` (`ID_MONTADORA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`VEICULO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`VEICULO` (
+  `ID_RENAVAM` INT(11) NOT NULL AUTO_INCREMENT,
+  `DS_COR` VARCHAR(45) NULL DEFAULT NULL,
+  `VL_ANO_MODELO` TINYINT(4) NULL DEFAULT NULL,
+  `VL_ANO_FABRICACAO` TINYINT(4) NULL DEFAULT NULL,
+  `DS_OBS` VARCHAR(255) NULL DEFAULT NULL,
+  `DT_COMPRA` DATETIME NULL DEFAULT NULL,
+  `VL_COMPRA` INT(11) NULL DEFAULT NULL,
+  `VL_KM_COMPRA` SMALLINT(6) NULL DEFAULT NULL,
+  `DT_VENDA` DATETIME NULL DEFAULT NULL,
+  `ID_MODELO` SMALLINT(6) NOT NULL,
+  `ID_LOJA` SMALLINT(6) NOT NULL,
+  PRIMARY KEY (`ID_RENAVAM`, `ID_MODELO`, `ID_LOJA`),
+  INDEX `fk_VEICULO_LOJA_idx` (`ID_LOJA` ASC),
+  INDEX `fk_VEICULO_MODELO_idx` (`ID_MODELO` ASC),
+  CONSTRAINT `fk_VEICULO_LOJA`
+    FOREIGN KEY (`ID_LOJA`)
+    REFERENCES `bd_oficina`.`LOJA` (`ID_LOJA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_VEICULO_MODELO`
+    FOREIGN KEY (`ID_MODELO`)
+    REFERENCES `bd_oficina`.`MODELO` (`ID_MODELO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`OFICINA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`OFICINA` (
+  `ID_OFICINA` INT(11) NOT NULL,
+  `DS_OFICINA` VARCHAR(20) NULL DEFAULT NULL,
+  `DS_CONTRATO` VARCHAR(20) NULL DEFAULT NULL,
+  `DS_ENDERECO` VARCHAR(60) NULL DEFAULT NULL,
+  `DS_TELEFONE` VARCHAR(12) NULL DEFAULT NULL,
+  `DS_OBS` VARCHAR(255) NULL DEFAULT NULL,
+  `ID_MONTADORA` SMALLINT(6) NOT NULL,
+  PRIMARY KEY (`ID_OFICINA`, `ID_MONTADORA`),
+  INDEX `fk_OFICINA_MONTADORA_idx` (`ID_MONTADORA` ASC),
+  CONSTRAINT `fk_OFICINA_MONTADORA`
+    FOREIGN KEY (`ID_MONTADORA`)
+    REFERENCES `bd_oficina`.`MONTADORA` (`ID_MONTADORA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`MANUTECAO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`MANUTECAO` (
+  `ID_MANUTENCAO` INT(11) NOT NULL,
+  `DS_MANUTENCAO` VARCHAR(50) NULL DEFAULT NULL,
+  `DT_MANUTENCAO` DATETIME NULL DEFAULT NULL,
+  `ID_OFICINA` INT(11) NOT NULL,
+  `ID_RENAVAM` INT(11) NOT NULL,
+  PRIMARY KEY (`ID_MANUTENCAO`, `ID_OFICINA`, `ID_RENAVAM`),
+  INDEX `fk_MANUTECAO_VEICULO_idx` (`ID_RENAVAM` ASC),
+  INDEX `fk_MANUTECAO_OFICINA_idx` (`ID_OFICINA` ASC),
+  CONSTRAINT `fk_MANUTECAO_VEICULO`
+    FOREIGN KEY (`ID_RENAVAM`)
+    REFERENCES `bd_oficina`.`VEICULO` (`ID_RENAVAM`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MANUTECAO_OFICINA`
+    FOREIGN KEY (`ID_OFICINA`)
+    REFERENCES `bd_oficina`.`OFICINA` (`ID_OFICINA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`PECA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`PECA` (
+  `ID_PECA` SMALLINT(6) NOT NULL AUTO_INCREMENT,
+  `DS_PECA` VARCHAR(20) NULL DEFAULT NULL,
+  `FL_ORIGINAL` BIT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID_PECA`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`PRODUTO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`PRODUTO` (
+  `ID_PRODUTO` SMALLINT(6) NOT NULL AUTO_INCREMENT,
+  `DS_PRODUTO` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID_PRODUTO`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`SERVICO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`SERVICO` (
+  `ID_SERVICO` SMALLINT(6) NOT NULL AUTO_INCREMENT,
+  `DS_SERVICO` VARCHAR(30) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID_SERVICO`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`MANUTECAO_SERVICO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`MANUTECAO_SERVICO` (
+  `VL_COBRADO` DECIMAL(10,2) NULL,
+  `ID_MANUTENCAO` INT(11) NOT NULL,
+  `ID_SERVICO` SMALLINT(6) NOT NULL,
+  PRIMARY KEY (`ID_MANUTENCAO`, `ID_SERVICO`),
+  INDEX `fk_MANUTECAO_has_SERVICO_SERVICO_idx` (`ID_SERVICO` ASC),
+  INDEX `fk_MANUTECAO_has_SERVICO_MANUTECAO_idx` (`ID_MANUTENCAO` ASC),
+  CONSTRAINT `fk_MANUTECAO_has_SERVICO_MANUTECAO`
+    FOREIGN KEY (`ID_MANUTENCAO`)
+    REFERENCES `bd_oficina`.`MANUTECAO` (`ID_MANUTENCAO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MANUTECAO_has_SERVICO_SERVICO`
+    FOREIGN KEY (`ID_SERVICO`)
+    REFERENCES `bd_oficina`.`SERVICO` (`ID_SERVICO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`FABRICANTE_PRODUTO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`FABRICANTE_PRODUTO` (
+  `ID_FABRICANTE` INT(11) NOT NULL,
+  `ID_PRODUTO` SMALLINT(6) NOT NULL,
+  PRIMARY KEY (`ID_FABRICANTE`, `ID_PRODUTO`),
+  INDEX `fk_FABRICANTE_has_PRODUTO_PRODUTO_idx` (`ID_PRODUTO` ASC),
+  INDEX `fk_FABRICANTE_has_PRODUTO_FABRICANTE_idx` (`ID_FABRICANTE` ASC),
+  CONSTRAINT `fk_FABRICANTE_has_PRODUTO_FABRICANTE`
+    FOREIGN KEY (`ID_FABRICANTE`)
+    REFERENCES `bd_oficina`.`FABRICANTE` (`ID_FABRICANTE`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FABRICANTE_has_PRODUTO_PRODUTO`
+    FOREIGN KEY (`ID_PRODUTO`)
+    REFERENCES `bd_oficina`.`PRODUTO` (`ID_PRODUTO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`FABRICANTE_PECA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`FABRICANTE_PECA` (
+  `ID_FABRICANTE` INT(11) NOT NULL,
+  `ID_PECA` SMALLINT(6) NOT NULL,
+  PRIMARY KEY (`ID_FABRICANTE`, `ID_PECA`),
+  INDEX `fk_FABRICANTE_has_PECA_PECA_idx` (`ID_PECA` ASC),
+  INDEX `fk_FABRICANTE_has_PECA_FABRICANTE_idx` (`ID_FABRICANTE` ASC),
+  CONSTRAINT `fk_FABRICANTE_has_PECA_FABRICANTE`
+    FOREIGN KEY (`ID_FABRICANTE`)
+    REFERENCES `bd_oficina`.`FABRICANTE` (`ID_FABRICANTE`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FABRICANTE_has_PECA_PECA`
+    FOREIGN KEY (`ID_PECA`)
+    REFERENCES `bd_oficina`.`PECA` (`ID_PECA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`MANUTECAO_PRODUTO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`MANUTECAO_PRODUTO` (
+  `VL_COBRADO` DECIMAL(10,2) NULL,
+  `ID_FABRICANTE` INT(11) NOT NULL,
+  `ID_PRODUTO` SMALLINT(6) NOT NULL,
+  `ID_MANUTENCAO` INT(11) NOT NULL,
+  PRIMARY KEY (`ID_FABRICANTE`, `ID_PRODUTO`, `ID_MANUTENCAO`),
+  INDEX `fk_MANUTECAO_has_PRODUTO_PRODUTO_idx` (`ID_PRODUTO` ASC),
+  INDEX `fk_MANUTECAO_has_PRODUTO_MANUTECAO_idx` (`ID_MANUTENCAO` ASC),
+  INDEX `fk_MANUTECAO_has_PRODUTO_FABRICANTE_idx` (`ID_FABRICANTE` ASC),
+  CONSTRAINT `fk_MANUTECAO_has_PRODUTO_MANUTECAO`
+    FOREIGN KEY (`ID_MANUTENCAO`)
+    REFERENCES `bd_oficina`.`MANUTECAO` (`ID_MANUTENCAO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MANUTECAO_has_PRODUTO_PRODUTO`
+    FOREIGN KEY (`ID_PRODUTO`)
+    REFERENCES `bd_oficina`.`PRODUTO` (`ID_PRODUTO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MANUTECAO_has_PRODUTO_FABRICANTE`
+    FOREIGN KEY (`ID_FABRICANTE`)
+    REFERENCES `bd_oficina`.`FABRICANTE` (`ID_FABRICANTE`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bd_oficina`.`MANUTECAO_PECA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_oficina`.`MANUTECAO_PECA` (
+  `VL_COBRADO` DECIMAL(10,2) NULL,
+  `ID_MANUTENCAO` INT(11) NOT NULL,
+  `ID_PECA` SMALLINT(6) NOT NULL,
+  `ID_FABRICANTE` INT(11) NOT NULL,
+  PRIMARY KEY (`ID_MANUTENCAO`, `ID_PECA`, `ID_FABRICANTE`),
+  INDEX `fk_MANUTECAO_has_PECA_PECA_idx` (`ID_PECA` ASC),
+  INDEX `fk_MANUTECAO_has_PECA_MANUTECAO_idx` (`ID_MANUTENCAO` ASC),
+  INDEX `fk_MANUTECAO_PECA_FABRICANTE_idx` (`ID_FABRICANTE` ASC),
+  CONSTRAINT `fk_MANUTECAO_has_PECA_MANUTECAO`
+    FOREIGN KEY (`ID_MANUTENCAO`)
+    REFERENCES `bd_oficina`.`MANUTECAO` (`ID_MANUTENCAO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MANUTECAO_has_PECA_PECA`
+    FOREIGN KEY (`ID_PECA`)
+    REFERENCES `bd_oficina`.`PECA` (`ID_PECA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MANUTECAO_PECA_FABRICANTE`
+    FOREIGN KEY (`ID_FABRICANTE`)
+    REFERENCES `bd_oficina`.`FABRICANTE` (`ID_FABRICANTE`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

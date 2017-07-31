@@ -1,0 +1,146 @@
+body {
+    font-family: sans-serif;
+}
+
+.icone {
+    width: 13em;
+    height: 5em;
+}
+
+.cabecalho {
+    width: 100%;
+    background-color: dodgerblue;
+    border-radius: 5px;
+}
+
+main {
+    position: relative;
+}
+
+.titulo {
+    color: #091a2e;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 1.8em;
+    line-height: 24px;
+    margin: 50px 0 24px;
+    margin-bottom: 30px;
+}
+
+.img {
+    width: 100px;
+    height: 100px;
+    background-color: #35c4c4;
+    border-radius: 30%;
+}
+
+.template {
+    width: 350px;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 30em;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.opcoes {
+    border: 0 solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.link {
+    display: inline-block;
+    background-color: dodgerblue;
+    color: #FFFFFF;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 20px;
+    opacity: 0.9;
+}
+
+.template-control{
+    width: 30em;
+}
+
+.container {
+	margin: 0 auto;
+	width: 940px;
+}
+
+
+.fieldset-control{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+footer{
+    clear: both;
+    background-image: url(../img/fundo-rodape.png);
+    padding: 20px 0;
+    border-radius: 5px;
+}
+
+footer .container {
+    position: relative;
+}
+
+.footer img{
+  padding-left: 1px;
+    
+}
+
+.social{
+    position: absolute;
+    top: 10px;
+    right: 1px;
+}
+
+.social a {
+    /* tamanho do elemento = imagem */
+    height: 32px;
+    width: 32px;
+    border-radius: 5px;
+    
+    /* retirando o texto da frente */
+    display: inline-block;
+    text-indent: -9999px;
+    margin-right: 20px;
+}
+
+.social a[href*="facebook.com"] {
+    background-image: url(../img/facebook.png);
+    background-repeat: no-repeat;
+}
+
+.social a[href*="twitter.com"] {
+    background-image: url(../img/twitter.png);
+    background-repeat: no-repeat;
+}
+
+.social a[href*="plus.google.com"] {
+    background-image: url(../img/googleplus.png);
+    background-repeat: no-repeat;
+}
+
+.social li {
+    float: left;
+    margin-left: px;
+}
+

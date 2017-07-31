@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/fragmentos :: referencias">
+	<title id="pageTitle" >Cadastro de Oficinas</title>
+</head>
+<body>
+	
+	
+
+    <div class="panel panel-default body-size">
+    
+    	<div class="panel-heading">
+    		<div  th:replace="layout/fragmentos :: cabecalho"></div>
+        </div>
+        
+         <div data-th-replace="layout/fragmentos-mensagens :: mensagem-sucesso" ></div>
+        
+        <div class="panel panel-body">
+            <form class="form-horizontal" th:object="${oficina}" th:action="@{/oficinas/save}" method="POST" style="margin: 10px">
+                
+                <div data-th-replace="layout/fragmentos-mensagens :: mensagem-erro-form"></div>
+                
+                <div class="form-group ">
+                    <fieldset class="filedset-body">
+                        <div class="form-group row">
+                           
+                        </div>                    
+                        <div class="form-group row">
+                            <div class="col-md-1 col-xs-3 col-sm-2">
+                                <input type="text" class="form-control input-sm" id="id_oficina" th:field="*{idOficina}" readOnly="readonly"/>
+                            </div>
+                        </div>
+                         
+                        <div class="form-group row">                                                          
+                            
+                            <div class="col-md-4 form-imput" >
+                                <label>Nome</label>
+                                <input type="text" class="form-control input-sm" th:field="*{descricaoOficina}" placeholder="Informe a descrição"/>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">                                                          
+                            <div class="col-md-4 form-imput">
+                                <label>Contato</label>
+                                <input type="text" class="form-control input-sm" th:field="*{contato}" autofocus="autofocus" placeholder="Informe o contato" maxlength="50"/>
+                            </div>
+                        </div>  
+                        
+                        <div class="form-group row">
+                             <div class="col-md-5 col-xs-10">
+                                 <label for="endereco">Endereço </label>
+                                 <input class="col-md-12 form-control" th:field="*{endereco}" type="search" id="endereco" name="endereco" maxlength="50"/>
+                             </div>
+
+                             <div class="col-md-2 col-xs-10 col-md-offset-1">
+                                 <label for="cep">Digite seu CEP: </label>
+                                 <input type="search" name="cep" id="cep" class="form-control cep busca" maxlength="8" placeholder="Ex: 00000-000"/>
+
+                             </div>
+                         </div> 
+                        
+                        <div class="form-group row">                                                          
+                            <div class="col-md-4 form-imput">
+                                <label>Telefone</label>
+                                <input type="text" class="form-control input-sm telefone_com_ddd" th:field="*{telefone}" autofocus="autofocus" placeholder="Informe o telefone" maxlength="50"/>
+                            	<label><small class="detalhes">Ex: (00) 0000-0000</small></label>
+                            </div>
+                        </div> 
+                        
+                        <div class="form-group row">                                                          
+                            <div class="col-md-4 form-imput" >
+                                	<label>Observação</label>
+                                	<textarea class="form-control input-sm" th:field="*{observacao}" cols="5" rows="5" placeholder="Informe a observação"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <div class="col-md-4 form-imput">
+                            	<label>Montadoras</label> 
+                                <select name="idMontadora" class="form-control">
+									<option data-th-each="montadora : ${MontadorasTodos}"
+									      	data-th-value="${montadora.idMontadora}" 
+									      	data-th-text="${montadora.descricaoMontadora}"></option>
+								</select>
+                            </div>
+                        </div>
+
+                                               
+                    </fieldset>
+                </div>
+                <div class="form-group row text-center">
+                    <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                    <a th:href="@{/oficinas}" class="btn btn-sm btn-default">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

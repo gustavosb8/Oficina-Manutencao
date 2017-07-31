@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/fragmentos :: referencias">
+	<title id="pageTitle" >Cadastro de Tipo</title>
+</head>
+<body>
+	
+	
+
+    <div class="panel panel-default body-size">
+    
+    	<div class="panel-heading">
+    		<div  th:replace="layout/fragmentos :: cabecalho"></div>
+        </div>
+        
+        <div data-th-replace="layout/fragmentos-mensagens :: mensagem-sucesso" ></div>
+        
+        <div class="panel panel-body">
+            <form class="form-horizontal" th:object="${tipoVeiculo}" th:action="@{/tipoveiculos/save}" method="POST" style="margin: 10px">
+                
+                <div data-th-replace="layout/fragmentos-mensagens :: mensagem-erro-form"></div>
+                
+                <div class="form-group ">
+                    <fieldset class="filedset-body">
+                        <div class="form-group row">
+                           
+                        </div>                    
+                        <div class="form-group row">
+                            <div class="col-md-1">
+                                <input type="text" class="form-control input-sm" id="id_tipo_veiculo" th:field="*{idTipoVeiculo}" readOnly="readonly"/>
+                            </div>
+                         </div>
+                        <div class="form-group row">                                                          
+                            <div class="col-md-4 form-imput">
+                                <label>Descrição</label>
+                                <input type="text" class="form-control input-sm" th:field="*{desc_tipoVeiculo}" autofocus="autofocus" placeholder="Informe a descrição"/>
+                            </div>
+                        </div>
+            
+                    </fieldset>
+                </div>
+                <div class="form-group row text-center">
+                    <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                    <a th:href="@{/tipoveiculos}" class="btn btn-sm btn-default">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

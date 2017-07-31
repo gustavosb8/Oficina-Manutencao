@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/fragmentos :: referencias">
+	<title id="pageTitle" >Cadastro de Montadoras</title>
+</head>
+<body>
+	
+	
+
+    <div class="panel panel-default body-size">
+    
+    	<div class="panel-heading">
+    		<div  th:replace="layout/fragmentos :: cabecalho"></div>
+        </div>
+        
+        <div data-th-replace="layout/fragmentos-mensagens :: mensagem-sucesso" ></div>
+        
+        <div class="panel panel-body">
+            <form class="form-horizontal" th:object="${montadora}" th:action="@{/montadoras/save}" method="POST" style="margin: 10px">
+                
+                <div data-th-replace="layout/fragmentos-mensagens :: mensagem-erro-form"></div>
+                
+                <div class="form-group ">
+                    <fieldset class="filedset-body">
+                        <div class="form-group row">
+                           
+                        </div>                    
+                        <div class="form-group row">
+                            <div class="col-md-1">
+                                <input type="text" class="form-control input-sm" id="id_montadora" th:field="*{idMontadora}" readOnly="readonly"/>
+                            </div>
+                         </div>
+                        <div class="form-group row">                                                          
+                            <div class="col-md-4 form-imput">
+                                <label>Descrição</label>
+                                <textarea class="form-control input-sm" th:field="*{descricaoMontadora}" autofocus="autofocus" placeholder="Informe a descrição da Montadora" maxlength="50"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">                                                          
+                            <div class="col-md-4 form-imput">
+                                <label>Origem</label>
+                                <textarea class="form-control input-sm" th:field="*{descricaoOrigem}" autofocus="autofocus" placeholder="Informe a descrição da Origem" maxlength="50"></textarea>
+                            </div>
+                        </div>
+                                             
+                    </fieldset>
+                </div>
+                <div class="form-group row text-center">
+                    <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                    <a th:href="@{/montadoras}" class="btn btn-sm btn-default">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

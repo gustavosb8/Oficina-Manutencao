@@ -1,0 +1,79 @@
+.carousel-wrapper {
+    position: relative;
+    color: red;
+}
+
+.carousel-wrapper .carousel-item {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px 50px;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    
+}
+
+.carousel-wrapper .carousel-item .arrow {
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 20px;
+    height: 900%;
+    -webkit-tap-highlight-color: transparent;
+    background: url("../img/img_css/arrow-left-navigation-slide-back-128.png") 50% 50%/20px no-repeat;
+}
+
+.carousel-wrapper .carousel-item .arrow.arrow-prev {
+    left: 0;
+}
+
+.carousel-wrapper .carousel-item .arrow.arrow-next {
+    right: 0;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.carousel-wrapper .carousel-item.light {
+    color: white;
+}
+
+.carousel-wrapper .carousel-item.light .arrow {
+    background: url("../img/img_css/arrow-left-navigation-slide-back-128.png") 50% 50%/20px no-repeat;
+}
+
+.carousel-wrapper [id^="target-item"] {
+    display: none;
+}
+
+.carousel-wrapper .item-1 {
+    z-index: 2;
+    opacity: 1;
+
+
+}
+
+.carousel-wrapper .item-2 {
+
+
+}
+
+.carousel-wrapper .item-3 {
+
+    background-size: cover;
+}
+
+.carousel-wrapper *:target~.item-1 {
+    opacity: 0;
+}
+
+.carousel-wrapper #target-item-1:target~.item-1 {
+    opacity: 1;
+}
+
+.carousel-wrapper #target-item-2:target~.item-2,
+.carousel-wrapper #target-item-3:target~.item-3 {
+    z-index: 3;
+    opacity: 1;
+}

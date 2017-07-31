@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/fragmentos :: referencias">
+	<title id="pageTitle" >Cadastro de Fabricantes</title>
+</head>
+<body>
+	
+	
+
+    <div class="panel panel-default body-size">
+    
+    	<div class="panel-heading">
+    		<div  th:replace="layout/fragmentos :: cabecalho"></div>
+        </div>
+        
+         <div data-th-replace="layout/fragmentos-mensagens :: mensagem-sucesso" ></div>
+        
+        <div class="panel panel-body">
+            <form class="form-horizontal" th:object="${fabricante}" th:action="@{/fabricantes/save}" method="POST" style="margin: 10px">
+                
+                <div data-th-replace="layout/fragmentos-mensagens :: mensagem-erro-form"></div>
+                
+                <div class="form-group ">
+                    <fieldset class="filedset-body">
+                        <div class="form-group row">
+                           
+                        </div>                    
+                        <div class="form-group row">
+                            <div class="col-md-1">
+                                <input type="text" class="form-control input-sm" id="id_fabricante" th:field="*{idFabricante}" readOnly="readonly"/>
+                            </div>
+                         </div>
+
+                        <div class="form-group row">                                                          
+                            
+                            <div class="col-md-4 form-imput" >
+                                <label>Descricao</label>
+                                <textarea class="form-control input-sm" th:field="*{descProduto}" cols="5" rows="5" placeholder="Informe a Descricao"></textarea>
+                            </div>
+                        </div> 
+                        
+                        <div class="form-group row">
+                            <div class="col-md-4 form-imput">
+                            	<label>Produtos</label> 
+                                <select name="idProduto" class="form-control">
+									<option data-th-each="produto : ${ProdutosTodos}"
+									      	data-th-value="${produto.idProduto}" 
+									      	data-th-text="${produto.descProduto}"></option>
+								</select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <div class="col-md-4 form-imput">
+                            	<label>Pecas</label> 
+                                <select name="idPeca" class="form-control">
+									<option data-th-each="peca : ${PecasTodos}"
+									      	data-th-value="${peca.idPeca}" 
+									      	data-th-text="${peca.descPeca}"></option>
+								</select>
+                            </div>
+                        </div>
+                                               
+                    </fieldset>
+                </div>
+                <div class="form-group row text-center">
+                    <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                    <a th:href="@{/fabricantes}" class="btn btn-sm btn-default">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
