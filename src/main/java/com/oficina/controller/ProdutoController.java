@@ -51,7 +51,7 @@ public class ProdutoController {
         mv.addObject("produto", produto);
 
         return mv;
-    }
+    } 	
     
     @ModelAttribute("FabricanteTodos")
     public List<Fabricante> todasFabricantes() {
@@ -61,7 +61,7 @@ public class ProdutoController {
 	}
      
     @GetMapping("/produtos/edit/{id_produto}")
-    public ModelAndView edit(@PathVariable("id_produto") Integer id_produto) {
+    public ModelAndView edit(@PathVariable("id_produto") Long id_produto) {
          
     	Produto produto = service.findOne(id_produto );
 		
@@ -72,14 +72,13 @@ public class ProdutoController {
     }
      
     @GetMapping("/produtos/delete/{id_produto}")
-    public ModelAndView delete(@PathVariable("id_produto") Integer id_produto) {
+    public ModelAndView delete(@PathVariable("id_produto") Long id_produto) {
         service.delete(id_produto);
         return findAll();
     }
  
     @PostMapping("/produtos/save")
     public String save(@Validated Produto produto, 
-    		Integer idFabricante, /*Alterar pra um vetor de id's*/
     		Errors validacao,  
     		RedirectAttributes redirect,
     		BindingResult result, 
@@ -90,8 +89,6 @@ public class ProdutoController {
             return "produtos/cadastroproduto";
         }
          
-        Fabricante fabricante = fabricanteService.findOne(idFabricante);
-        produto.getFabricante().add(fabricante);
         service.save(produto);
          
         redirect.addFlashAttribute("mensagem_sucesso", "O Produto foi Salvo com Sucesso" );

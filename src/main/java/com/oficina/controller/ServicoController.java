@@ -27,7 +27,7 @@ public class ServicoController {
     @GetMapping("/servicos")
     public ModelAndView findAll() {
          
-        ModelAndView mv = new ModelAndView("/veiculos/controleservico");
+        ModelAndView mv = new ModelAndView("/servicos/controleservico");
         List<Servico> servicos = service.findAll();
         /*System.out.println("***** " + servicos );*/
         

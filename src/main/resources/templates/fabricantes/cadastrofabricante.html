@@ -27,7 +27,7 @@
                            
                         </div>                    
                         <div class="form-group row">
-                            <div class="col-md-1">
+                            <div class="col-md-1 col-xs-3 col-sm-2">
                                 <input type="text" class="form-control input-sm" id="id_fabricante" th:field="*{idFabricante}" readOnly="readonly"/>
                             </div>
                          </div>
@@ -36,32 +36,10 @@
                             
                             <div class="col-md-4 form-imput" >
                                 <label>Descricao</label>
-                                <textarea class="form-control input-sm" th:field="*{descProduto}" cols="5" rows="5" placeholder="Informe a Descricao"></textarea>
+                                <textarea class="form-control input-sm" th:field="*{descFabricante}" cols="5" rows="5" placeholder="Informe a Descricao"></textarea>
                             </div>
                         </div> 
-                        
-                        <div class="form-group row">
-                            <div class="col-md-4 form-imput">
-                            	<label>Produtos</label> 
-                                <select name="idProduto" class="form-control">
-									<option data-th-each="produto : ${ProdutosTodos}"
-									      	data-th-value="${produto.idProduto}" 
-									      	data-th-text="${produto.descProduto}"></option>
-								</select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group row">
-                            <div class="col-md-4 form-imput">
-                            	<label>Pecas</label> 
-                                <select name="idPeca" class="form-control">
-									<option data-th-each="peca : ${PecasTodos}"
-									      	data-th-value="${peca.idPeca}" 
-									      	data-th-text="${peca.descPeca}"></option>
-								</select>
-                            </div>
-                        </div>
-                                               
+              
                     </fieldset>
                 </div>
                 <div class="form-group row text-center">

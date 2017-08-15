@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -37,9 +38,14 @@ public class Peca implements Serializable{
 	
 	/**** JPA ****/
 
-	@ManyToMany(mappedBy = "pecas")
+	@ManyToMany
 	private List<Fabricante> fabricantes;
-
+	
+	@OneToMany(mappedBy = "peca")
+	private List<ManutencaoPeca> manutencaoPecas;
+	
+	
+	
 	public Integer getIdPeca() {
 		return idPeca;
 	}
@@ -62,6 +68,14 @@ public class Peca implements Serializable{
 
 	public void setFabricantes(List<Fabricante> fabricantes) {
 		this.fabricantes = fabricantes;
+	}
+
+	public List<ManutencaoPeca> getManutencaoPecas() {
+		return manutencaoPecas;
+	}
+
+	public void setManutencaoPecas(List<ManutencaoPeca> manutencaoPecas) {
+		this.manutencaoPecas = manutencaoPecas;
 	}
 
 	@Override

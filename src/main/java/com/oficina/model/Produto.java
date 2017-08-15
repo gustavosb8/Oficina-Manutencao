@@ -3,18 +3,21 @@ package com.oficina.model;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+//import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+
 
 @Entity 
 @Table(name = "PRODUTO")
@@ -23,9 +26,9 @@ public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_PRODUTO")
-	private Integer idProduto;
+	private Long idProduto;
 	
 	@NotEmpty
 	@Size(min=2)
@@ -33,18 +36,20 @@ public class Produto implements Serializable{
 	private String descProduto;
 	
 	/**** JPA ****/
-	@NotEmpty
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "FABRICANTE_PRODUTO", joinColumns = @JoinColumn(name = "ID_FABRICANTE", referencedColumnName = "ID_PRODUTO"), inverseJoinColumns = @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID_FABRICANTE"))
+	
+	@ManyToMany
 	private List<Fabricante> fabricantes;
+	
+	@OneToMany(mappedBy = "produto")
+	private List<ManutencaoProduto> manutencaoProdutos;
 	
 	/**** JPA ****/
 	
-	public Integer getIdProduto() {
+	public Long getIdProduto() {
 		return idProduto;
 	}
 
-	public void setIdProduto(Integer idProduto) {
+	public void setIdProduto(Long idProduto) {
 		this.idProduto = idProduto;
 	}
 
@@ -73,6 +78,7 @@ public class Produto implements Serializable{
 	public void setFabricantes(List<Fabricante> fabricantes) {
 		this.fabricantes = fabricantes;
 	}
+
 
 	@Override
 	public String toString() {

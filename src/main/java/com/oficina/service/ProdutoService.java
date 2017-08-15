@@ -19,7 +19,7 @@ public class ProdutoService {
         return repository.findAll();
     }
      
-    public Produto findOne(Integer id) {
+    public Produto findOne(Long id) {
         return repository.findOne(id);
     }
      
@@ -28,7 +28,7 @@ public class ProdutoService {
         return repository.saveAndFlush(produto);
     }
      
-    public void delete(Integer id) {
+    public void delete(Long id) {
         repository.delete(id);
     }
 }

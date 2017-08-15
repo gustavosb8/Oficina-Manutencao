@@ -21,8 +21,6 @@
 
                             <th>ID</th>
                             <th>Descrição</th>
-                            <th>Produto Relacionado</th>
-                            <th>Peca Relacionado</th>
                             <th><small class="detalhes disabled">Opções</small></th>
 
                         </tr>
@@ -31,10 +29,7 @@
                         <tr th:each="fabricante : ${fabricantes}">
                             <td th:text="${fabricante.idFabricante}"></td>
                             <td th:text="${fabricante.descFabricante}"></td>
-                            <td th:text="${fabricante.produtos}"></td>
-                            <td th:text="${fabricante.pecas}"></td>
 
-                            
                             <td>
                                 <div class="btn-group pull-right">
                                     <a class="btn btn-sm btn-primary" th:href="@{/fabricantes/edit/{id}(id=${fabricante.idFabricante})}" >Editar</a>
@@ -49,7 +44,7 @@
         
         
         <div class="panel-footer text-right">
-            <a class="btn btn-sm btn-success" th:href="@{/fabricantes/add/}" >Cadastrar Novo</a>
+            <a class="btn btn-sm btn-success" th:href="@{/fabricantes/add}" >Cadastrar Novo</a>
         </div>
         
         

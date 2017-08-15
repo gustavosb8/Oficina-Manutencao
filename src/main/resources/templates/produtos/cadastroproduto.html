@@ -17,7 +17,7 @@
          <div data-th-replace="layout/fragmentos-mensagens :: mensagem-sucesso" ></div>
         
         <div class="panel panel-body">
-            <form class="form-horizontal" th:object="${produto}" th:action="@{/prosutos/save}" method="POST" style="margin: 10px">
+            <form class="form-horizontal" th:object="${produto}" th:action="@{/produtos/save}" method="POST" style="margin: 10px">
                 
                 <div data-th-replace="layout/fragmentos-mensagens :: mensagem-erro-form"></div>
                 
@@ -27,28 +27,29 @@
                            
                         </div>                    
                         <div class="form-group row">
-                            <div class="col-md-1">
+                            <div class="col-md-1 col-xs-3 col-sm-2">
                                 <input type="text" class="form-control input-sm" id="id_produto" th:field="*{idProduto}" readOnly="readonly"/>
                             </div>
                          </div>
 
                         <div class="form-group row">                                                          
                             <div class="col-md-4 form-imput" >
-                                <label>Descricao</label>
+                                <label>Descrição</label>
                                 <textarea class="form-control input-sm" th:field="*{descProduto}" cols="5" rows="5" placeholder="Informe a Descricao"></textarea>
                             </div>
                         </div> 
                         
                         <div class="form-group row">
-                            <div class="col-md-4 form-imput">
-                            	<label>Fabricantes</label> 
-                                <select name="idFabricante" class="form-control">
-									<option data-th-each="fabricante : ${FabricanteTodos}"
-									      	data-th-value="${fabricante.idFabricante}" 
-									      	data-th-text="${fabricante.descFabricante}"></option>
-								</select>
-                            </div>
-                        </div>
+							<div class="col-md-4 form-imput">
+								<ul>
+									<li th:each="fabricante : ${FabricanteTodos}">
+							  			<input type="checkbox" th:field="${produto.fabricantes}" th:value="${fabricante.idFabricante}" /> 
+							  			<label th:for="${#ids.prev('fabricantes')}" th:text="${fabricante.idFabricante}">Fabricante</label>
+							  												   <!--th:text="#{${'seedstarter.feature.' + feat}}">Heating</label>-->
+									</li>
+								</ul>
+           					</div>
+         				</div>
                                                
                     </fieldset>
                 </div>

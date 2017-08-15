@@ -2,6 +2,7 @@ package com.oficina.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -42,9 +44,16 @@ public class Manutencao implements Serializable{
 	@ManyToOne
 	private Oficina oficina;
 	
-	//list produto manytomany
-	//list peça manytomany
-	//list serviço manytomany
+	@OneToMany(mappedBy = "manutencao")
+	private List<ManutencaoServico> manutencaoServicos; 
+	
+	
+	@OneToMany(mappedBy = "manutencao")
+	private List<ManutencaoProduto> manutencaoProdutos;
+	
+	
+	@OneToMany(mappedBy = "manutencao")
+	private List<ManutencaoPeca> manutencaoPecas;
 	
 	/**** JPA ****/
 	
@@ -88,6 +97,22 @@ public class Manutencao implements Serializable{
 
 	public void setOficina(Oficina oficina) {
 		this.oficina = oficina;
+	}
+
+	public List<ManutencaoServico> getManutencaoServicos() {
+		return manutencaoServicos;
+	}
+
+	public void setManutencaoServicos(List<ManutencaoServico> manutencaoServicos) {
+		this.manutencaoServicos = manutencaoServicos;
+	}
+
+	public List<ManutencaoPeca> getManutencaoPecas() {
+		return manutencaoPecas;
+	}
+
+	public void setManutencaoPecas(List<ManutencaoPeca> manutencaoPecas) {
+		this.manutencaoPecas = manutencaoPecas;
 	}
 
 	@Override

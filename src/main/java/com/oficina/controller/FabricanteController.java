@@ -93,8 +93,6 @@ public class FabricanteController {
  
     @PostMapping("/fabricantes/save")
     public String save(@Validated Fabricante fabricante, 
-    		Integer idProduto, /*Alterar para vetores de id's*/
-    		Integer idPeca,
     		Errors validacao,  
     		RedirectAttributes redirect,
     		BindingResult result, 
@@ -105,10 +103,6 @@ public class FabricanteController {
             return "fabricantes/cadastrofabricante";
         }
         
-        Produto produto = produtoService.findOne(idProduto);
-        Peca peca = pecaService.findOne(idPeca);
-        fabricante.getPecas().add(peca);
-        fabricante.getProdutos().add(produto);
         service.save(fabricante);
          
         redirect.addFlashAttribute("mensagem_sucesso", "O Fabricante foi Salvo com Sucesso" );
