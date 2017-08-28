@@ -24,8 +24,8 @@ public class Fabricante implements Serializable{
 	@Column(name = "ID_FABRICANTE")
 	private Integer idFabricante;
 	
-	@NotEmpty
-	@Size(min=2)
+	@NotEmpty(message="O campo descrição não pode estar vazio")
+	@Size(min=2, message="Descrição deve ser maior")
 	@Column(name = "DS_FABRICANTE")
 	private String descFabricante;
 	

@@ -64,10 +64,11 @@ public class Produto implements Serializable{
 	public String getFabricantes() {
 		
 		String fabricantes = "";
-		for(int i = 0; i < fabricantes.length(); i++){
+		for(int i = 0; i < this.fabricantes.size(); i++){
 			fabricantes = fabricantes + this.fabricantes.get(i).getDescFabricante();
 		}
 		
+		System.out.println(fabricantes);
 		return fabricantes;
 	}
 	

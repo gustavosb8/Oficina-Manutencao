@@ -1,122 +1,196 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="layout/fragmentos :: referencias">
-	<title id="pageTitle" >Cadastro de Veiculos</title>
-</head>
-<body>
-	
-	
 
-    <div class="panel panel-default body-size">
+<!-- th:replace="layout/fragmentos :: referencias"> -->
+<head>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	
+	<link rel="icon" th:href="@{/img/favicon.png}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"/>
     
-    	<div class="panel-heading">
-    		<div  th:replace="layout/fragmentos :: cabecalho"></div>
+	<script th:src="@{/js/busca-cep.js}" type="text/javascript"></script>
+	<script th:src="@{/js/locastyle.js}" type="text/javascript"></script>
+	<script th:src="@{/js/mascaras.js}" type="text/javascript"></script>
+	
+	<script th:src="@{/bootstrap4/js/jquery-3.1.1.slim.min.js}" type="text/javascript"></script>
+	<script th:src="@{/bootstrap4/js/tether.min.js}" type="text/javascript"></script>
+	<script th:src="@{/bootstrap4/js/bootstrap.min.js}" type="text/javascript"></script>
+
+    <script th:src="@{/js/jquery.dataTables.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/dataTables.bootstrap.min.js}" type="text/javascript"></script>
+
+	<link th:href = "@{/css/jquery.dataTables.min.css}" rel="stylesheet"/>
+    <link  th:href = "@{/css/estilos.css}" rel="stylesheet"/>
+    <link rel="icon" href="img/favicon.png">
+	<!-- <title id="pageTitle" >Cadastro de Veiculos</title> -->
+	<title>Cadastro de Veiculos</title>
+	
+</head>
+
+<body class="container">
+    
+	<nav class="navbar navbar-light bg-faded rounded navbar-toggleable-md">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+		  <img src="/img/logo.png" class="img-responsive img-rounded" alt="imagem logo" width= "130"/>
+		  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link active" th:href="@{/}">Página Inicial <span class="sr-only">(current)</span></a>
+          </li>	
+
+          <li class="nav-item dropdown">
+			 <div class="dropdown">
+			  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    Controle
+			  </button>
+			  <div class="dropdown-menu col-md-8" aria-labelledby="dropdownMenuButton">
+			    <a class="dropdown-item" th:href="@{/fabricantes/}">Fabricantes</a>
+            	<a class="dropdown-item" th:href="@{/lojas/}">Lojas</a>
+            	<a class="dropdown-item" th:href="@{/manutencoes/}">Manutenção</a>
+            	<a class="dropdown-item" th:href="@{/modelos/}">Modelos</a>
+            	<a class="dropdown-item" th:href="@{/montadoras/}">Montadoras</a>
+	            <a class="dropdown-item" th:href="@{/oficinas/}">Oficinas</a>
+	            <a class="dropdown-item" th:href="@{/servicos/}">Serviços</a>
+	            <a class="dropdown-item" th:href="@{/pecas/}">Peças</a>
+	            <a class="dropdown-item" th:href="@{/produtos/}">Produtos</a>
+	            <a class="dropdown-item" th:href="@{/tipoveiculos/}">Tipo veiculos</a>
+	            <a class="dropdown-item" th:href="@{/veiculos/}">Veiculos</a>
+	            
+	            <div class="dropdown-divider"></div>
+	            
+	            <a class="dropdown-item" th:href="@{/manutencaopecas/}">Manutenção-Peça</a>
+	            <a class="dropdown-item" th:href="@{/manutencaoprodutos/}">Manutenção-Produto</a>
+	            <a class="dropdown-item" th:href="@{/manutencaoservicos/}">Manutenção-Serviço</a>
+	            
+			  </div>
+			</div>
+          </li>
+        </ul>
+        <div class="form-inline my-2 my-md-0">
+          <ul class="nav navbar-nav navbar-right painel-sair" >
+        <li class="li-sair">
+        	<a th:href="@{/}" style="padding-top: 20px;">
+        		<button type="button" class="btn btn- btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+	    			<span></span> 
+	  				Sair
+	  				<img th:src="@{/img/glyphicons-388-log-out.png}">
+	  			</button>
+        	</a>
+        </li>
+      </ul>
         </div>
-        
+      </div>
+		</nav>
+        <br>
         <div data-th-replace="layout/fragmentos-mensagens :: mensagem-sucesso" ></div>
         
-        <div class="panel panel-body">
+        <div class="card card-block">
             <form class="form-horizontal" th:object="${veiculo}" th:action="@{/veiculos/save}" method="POST" style="margin: 10px">
                 
                 <div data-th-replace="layout/fragmentos-mensagens :: mensagem-erro-form"></div>
                 
-                <div class="form-group ">
+                <div class="form-group">
                     <fieldset class="filedset-body">
                         <div class="form-group row">
                            
                         </div>                    
-                        <div class="form-group row">
-                            <div class="col-md-1 col-xs-3 col-sm-2">
+                        <div class="form-group row ">
+                            <div class="col-2 col-md-1 ">
                                 <input type="text" class="form-control input-sm" id="id_renavam" th:field="*{idRenavam}" readOnly="readonly"/>
                             </div>
                          </div>
-                        <div class="form-group row">                                                          
-                            <div class="col-md-4 form-imput">
-                                <label>Cor</label>
-                                <input type="text" class="form-control input-sm" th:field="*{descricaoCor}" autofocus="autofocus" placeholder="Informe a cor do veiculo" maxlength="50"/>
-                            </div>
+                         
+                        
+                        <div class="form-group col-md-10">
+                        	<label>Cor</label>                                                          
+                            <input type="text" class="form-control input-sm" th:field="*{descricaoCor}" autofocus="autofocus" placeholder="Informe a cor do veiculo" maxlength="50"/>
                         </div>
                         
-                        <div class="form-group row">
-                            <div class="col-md-4 form-imput">
+                        <div class="form-group col-md-10">
+
                                 <label>Ano Modelo</label> 
                                 <input type="text" class="form-control input-sm" th:field="*{anoModelo}" maxlength="4" placeholder="Informe o Ano Modelo"/>
-                            </div>
+
                         </div>
                         
-                        <div class="form-group row">
-                            <div class="col-md-4 form-imput">
+                        <div class="form-group col-md-10">
+
                                 <label>Ano Fabricação</label> 
                                 <input type="text" class="form-control input-sm" th:field="*{anoFabricacao}" maxlength="4" placeholder="Informe o Ano Fabricação"/>
-                            </div>
+
                         </div>
                         
-                        <div class="form-group row">
-                            <div class="col-md-4 form-imput" >
+                        <div class="form-group col-md-10">
+
                                 <label>Observação</label>
                                 <textarea class="form-control input-sm" th:field="*{observacao}" cols="5" rows="5" placeholder="Informe a Observação"></textarea>
-                            </div>
+
                         </div> 
                         
-                        <div class="form-group row">
-                            <div class="col-md-2">
+                        <div class="form-group col-md-10">
+
                                 <label>Data de Compra</label> 
                                 <input type="date" class="form-control input-sm" th:field="*{dataCompra}"/>
-                            </div>
+
                         </div>   
                         
-                        <div class="form-group row">
-                            <div class="col-md-4 form-imput">
+                        <div class="form-group col-md-10">
+
                                 <label>Valor de Compra</label> 
                                 <input type="text" class="form-control input-sm" th:field="*{valorCompra}" placeholder="Informe o Valor de Compra"/>
-                            </div>
+
                         </div>
                         
-                         <div class="form-group row">
-                            <div class="col-md-4 form-imput">
+                         <div class="form-group col-md-10">
+
                                 <label>Kilometragem</label> 
                                 <input type="text" class="form-control input-sm" th:field="*{kilometragemCompra}" maxlength="6" placeholder="Informe a Kilometragem"/>
-                            </div>
+
                         </div>
                                              
-                        <div class="form-group row">
-                            <div class="col-md-2">
+                        <div class="form-group col-md-10">
+
                                 <label>Data de Venda</label> 
                                 <input type="date" class="form-control input-sm" th:field="*{dataVenda}"/>
-                            </div>
+
                         </div>
                         
-                        <div class="form-group row">
-                            <div class="col-md-4 form-imput">
+                        <div class="form-group col-md-10">
+
                             	<label>Modelos</label> 
                                 <select name="idModelo" class="form-control">
 									<option data-th-each="modelo : ${ModelosTodos}"
 									      	data-th-value="${modelo.idModelo}" 
 									      	data-th-text="${modelo.descModelo}"></option>
 								</select>
-                            </div>
+
                         </div>
                         
-                        <div class="form-group row">
-                            <div class="col-md-4 form-imput">
+                        <div class="form-group col-md-10">
+
                             	<label>Lojas</label> 
                                 <select name="idLoja" class="form-control">
 									<option data-th-each="loja : ${LojasTodos}"
 									      	data-th-value="${loja.idLoja}" 
 									      	data-th-text="${loja.nomeLoja}"></option>
 								</select>
-                            </div>
+
                         </div>
                                              
                     </fieldset>
                 </div>
-                <div class="form-group row text-center">
+                <div class="form-group text-center">
                     <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
                     <a th:href="@{/veiculos}" class="btn btn-sm btn-default">Cancelar</a>
                 </div>
             </form>
         </div>
-    </div>
 </body>
 </html>

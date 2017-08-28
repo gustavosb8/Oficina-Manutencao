@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout/fragmentos :: referencias">
-	<title id="pageTitle">Controle de Produtos</title>
+	<title id="pageTitle">Controle de Manutencão/Serviço</title>
 </head>
 
 <body>
@@ -20,26 +20,27 @@
                         <tr>
 
                             <th>ID</th>
-                            <th>Descrição</th>
+                            <th>Valor Cobrado</th>
+                            <th>Manutenção Relacionada</th>
+                            <th>Peca Relacionado</th>
                             <th>Fabricante Relacionado</th>
                             <th><small class="detalhes disabled">Opções</small></th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="produto : ${produtos}">
-                            <td th:text="${produto.idProduto}"></td>
-                            <td th:text="${produto.descProduto}"></td>
-                            <td th:text="${protudo.getFabricantes()}"></td>
-                            
-                            <!-- th:text="${protudo.getFabricantes()}" -->
-                            
-
+                        <tr th:each="manutencaoPeca : ${manutencaopecas}">
+                            <td th:text="${manutencaoPeca.idMpe}"></td>
+                            <td th:text="${manutencaoPeca.valorCobrado}"></td>
+                            <td th:text="${manutencaoPeca.manutencao}"></td>
+                            <td th:text="${manutencaoPeca.peca}"></td>
+                            <td th:text="${manutencaoPeca.fabricante}"></td>
                             
                             <td>
                                 <div class="btn-group pull-right">
-                                    <a class="btn btn-sm btn-primary" th:href="@{/produtos/edit/{id}(id=${produto.idProduto})}" >Editar</a>
-                                    <a class="delete btn btn-sm btn-danger" th:href="@{/produtos/delete/{id}(id=${produto.idProduto})}">Excluir</a>
+                                    <a class="btn btn-sm btn-primary" th:href="@{/manutencaopecas/edit/{id}(id=${manutencaoPeca.idMpe})}" >Editar</a>
+                                    
+                                    <a class="delete btn btn-sm btn-danger" th:href="@{/manutencaopecas/delete/{id}(id=${manutencaoPeca.idMpe})}">Excluir</a>
                                </div>
                             </td>
                         </tr>
@@ -50,7 +51,7 @@
         
         
         <div class="panel-footer text-right">
-            <a class="btn btn-sm btn-success" th:href="@{/produtos/add/}" >Cadastrar Novo</a>
+            <a class="btn btn-sm btn-success" th:href="@{/manutencaopecas/add}" >Cadastrar Novo</a>
         </div>
         
         

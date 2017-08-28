@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/fragmentos :: referencias">
+	<title id="pageTitle" >Cadastro Manutenção/Produtos</title>
+</head>
+<body>
+	
+	
+
+    <div class="panel panel-default body-size">
+    
+    	<div class="panel-heading">
+    		<div  th:replace="layout/fragmentos :: cabecalho"></div>
+        </div>
+        
+         <div data-th-replace="layout/fragmentos-mensagens :: mensagem-sucesso" ></div>
+        
+        <div class="panel panel-body">
+            <form class="form-horizontal" th:object="${manutencaoProduto}" th:action="@{/manutencaoprodutos/save}" method="POST" style="margin: 10px">
+                
+                <div data-th-replace="layout/fragmentos-mensagens :: mensagem-erro-form"></div>
+                
+                <div class="form-group ">
+                    <fieldset class="filedset-body">
+                        <div class="form-group row">
+                           
+                        </div>                    
+                        <div class="form-group row">
+                            <div class="col-md-1 col-xs-3 col-sm-2">
+                                <input type="text" class="form-control input-sm" id="id_mp" th:field="*{idMp}" readOnly="readonly"/>
+                            </div>
+                         </div>
+
+                        <div class="form-group row">                                                          
+                            <div class="col-md-4 form-imput" >
+                                <label>Valor</label>
+                                <input type="text" class="form-control input-sm" th:field="*{valorCobrado}" placeholder="Informe o valor cobrado"></input>
+                            </div>
+                        </div> 
+                        
+                        <div class="form-group row">
+                            <div class="col-md-4 form-imput">
+                            	<label>Manutenção</label> 
+                                <select name="idManutencao" class="form-control">
+									<option data-th-each="manutencao : ${ManutencaoTodos}"
+									      	data-th-value="${manutencao.idManutencao}" 
+									      	data-th-text="${manutencao.descricaoManutencao}"></option>
+								</select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <div class="col-md-4 form-imput">
+                            	<label>Produto</label> 
+                                <select name="idProduto" class="form-control">
+									<option data-th-each="produto : ${ProdutoTodos}"
+									      	data-th-value="${produto.idProduto}" 
+									      	data-th-text="${produto.descProduto}"></option>
+								</select>
+                            </div>
+                        </div>
+                        
+                         <div class="form-group row">
+                            <div class="col-md-4 form-imput">
+                            	<label>Fabricante</label> 
+                                <select name="idFabricante" class="form-control">
+									<option data-th-each="fabricante : ${FabricanteTodos}"
+									      	data-th-value="${fabricante.idFabricante}" 
+									      	data-th-text="${fabricante.descFabricante}"></option>
+								</select>
+                            </div>
+                        </div>
+
+                                               
+                    </fieldset>
+                </div>
+                <div class="form-group row text-center">
+                    <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                    <a th:href="@{/manutencaoprodutos}" class="btn btn-sm btn-default">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout/fragmentos :: referencias">
-	<title id="pageTitle" >Cadastro de Fabricantes</title>
+	<title id="pageTitle" >Cadastro de Serviços</title>
 </head>
 <body>
 	
@@ -14,10 +14,10 @@
     		<div  th:replace="layout/fragmentos :: cabecalho"></div>
         </div>
         
-         <div th:replace="layout/fragmentos-mensagens :: mensagem-sucesso" ></div>
+        <div data-th-replace="layout/fragmentos-mensagens :: mensagem-sucesso" ></div>
         
         <div class="panel panel-body">
-            <form class="form-horizontal" th:object="${fabricante}" th:action="@{/fabricantes/save}" method="POST" style="margin: 10px">
+            <form class="form-horizontal" th:object="${servico}" th:action="@{/servicos/save}" method="POST" style="margin: 10px">
                 
                 <div data-th-replace="layout/fragmentos-mensagens :: mensagem-erro-form"></div>
                 
@@ -28,23 +28,21 @@
                         </div>                    
                         <div class="form-group row">
                             <div class="col-md-1 col-xs-3 col-sm-2">
-                                <input type="text" class="form-control input-sm" id="id_fabricante" th:field="*{idFabricante}" readOnly="readonly"/>
+                                <input type="text" class="form-control input-sm" id="id_servico" th:field="*{idServico}" readOnly="readonly"/>
                             </div>
                          </div>
-
                         <div class="form-group row">                                                          
-                            
-                            <div class="col-md-4 form-imput" >
-                                <label>Descricao</label>
-                                <textarea class="form-control input-sm" th:field="*{descFabricante}" cols="5" rows="5" placeholder="Informe a Descricao"></textarea>
+                            <div class="col-md-4 form-imput">
+                                <label>Descrição</label>
+                                <input type="text" class="form-control input-sm" th:field="*{descServico}" autofocus="autofocus" placeholder="Informe a descrição"/>
                             </div>
-                        </div> 
-              
+                        </div>
+            
                     </fieldset>
                 </div>
                 <div class="form-group row text-center">
                     <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
-                    <a th:href="@{/fabricantes}" class="btn btn-sm btn-default">Cancelar</a>
+                    <a th:href="@{/servicos}" class="btn btn-sm btn-default">Cancelar</a>
                 </div>
             </form>
         </div>

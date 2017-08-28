@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout/fragmentos :: referencias">
-	<title id="pageTitle" >Cadastro de Produtos</title>
+	<title id="pageTitle" >Cadastro Manutenção/Serviço</title>
 </head>
 <body>
 	
@@ -17,7 +17,7 @@
          <div data-th-replace="layout/fragmentos-mensagens :: mensagem-sucesso" ></div>
         
         <div class="panel panel-body">
-            <form class="form-horizontal" th:object="${produto}" th:action="@{/produtos/save}" method="POST" style="margin: 10px">
+            <form class="form-horizontal" th:object="${manutencaoServico}" th:action="@{/manutencaoservicos/save}" method="POST" style="margin: 10px">
                 
                 <div data-th-replace="layout/fragmentos-mensagens :: mensagem-erro-form"></div>
                 
@@ -28,45 +28,45 @@
                         </div>                    
                         <div class="form-group row">
                             <div class="col-md-1 col-xs-3 col-sm-2">
-                                <input type="text" class="form-control input-sm" id="id_produto" th:field="*{idProduto}" readOnly="readonly"/>
+                                <input type="text" class="form-control input-sm" id="id_ms" th:field="*{idMs}" readOnly="readonly"/>
                             </div>
                          </div>
 
                         <div class="form-group row">                                                          
                             <div class="col-md-4 form-imput" >
-                                <label>Descrição</label>
-                                <textarea class="form-control input-sm" th:field="*{descProduto}" cols="5" rows="5" placeholder="Informe a Descricao"></textarea>
+                                <label>Valor</label>
+                                <input type="text" class="form-control input-sm" th:field="*{valorCobrado}" placeholder="Informe o valor cobrado"></input>
                             </div>
                         </div> 
                         
                         <div class="form-group row">
-							<div class="col-md-4 form-imput">
-								<label>Selecione os Fabricantes relacionados:</label>
-								<div class="panel panel-default">
-								<div class="container">
-									
-									<ul class="list-inline">
-										<li th:each="fabricante : ${FabricanteTodos}" >
-								  			<input type="checkbox"  th:value="${fabricante.idFabricante}" /> <!--erro:  th:field="${produto.fabricantes}" th:field="${produto.fabricantes}" -->
-								  			<label  th:text="${fabricante.descFabricante}">
-								  				Fabricante
-								  			</label>
-								  			
-								  			<!-- 
-								  			 th:for="${#ids.prev('fabricantes')}"
-								  			-->						  
-										</li>
-									</ul>
-								</div>
-								</div>
-           					</div>
-         				</div>
+                            <div class="col-md-4 form-imput">
+                            	<label>Manutenção</label> 
+                                <select name="idManutencao" class="form-control">
+									<option data-th-each="manutencao : ${ManutencaoTodos}"
+									      	data-th-value="${manutencao.idManutencao}" 
+									      	data-th-text="${manutencao.descricaoManutencao}"></option>
+								</select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <div class="col-md-4 form-imput">
+                            	<label>Serviço</label> 
+                                <select name="idServico" class="form-control">
+									<option data-th-each="servico : ${ServicosTodos}"
+									      	data-th-value="${servico.idServico}" 
+									      	data-th-text="${servico.descServico}"></option>
+								</select>
+                            </div>
+                        </div>
+
                                                
                     </fieldset>
                 </div>
                 <div class="form-group row text-center">
                     <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
-                    <a th:href="@{/produtos}" class="btn btn-sm btn-default">Cancelar</a>
+                    <a th:href="@{/manutencaoservicos}" class="btn btn-sm btn-default">Cancelar</a>
                 </div>
             </form>
         </div>

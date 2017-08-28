@@ -1,0 +1,61 @@
+.carrousel{
+    margin-left: 10rem;
+}
+
+.carrousel-control{
+    left: 665px;
+}
+
+.navbar-remaster{
+    background-color: #8AD271;
+    border-radius: 0.3rem;
+}
+
+#menu ul {
+    padding:0px;
+    margin:0px;
+    background-color:#EDEDED;
+    list-style:none;
+}
+
+#menu ul li { 
+    display: inline; 
+}
+
+#menu ul li a {
+    width: 70%;
+    padding: 2px 10px;
+    display: inline-block;
+    /* visual do link */
+    background-color:#EDEDED;
+    color: #333;
+    text-decoration: none;
+    border-bottom:3px solid #EDEDED;
+}
+
+#menu ul li a:hover {
+    width: 70%;
+    padding: 2px 10px;
+    display: inline-block;
+    /* visual do link */
+    background-color:#EDEDED;
+    color: #35a758;
+    text-decoration: none;
+    border-bottom:3px solid #EDEDED;
+}
+
+.footer{
+    /*background-image: url(../img/pets-footer-2040x400.png);*/
+    background-image: url(../img/footer.jpg);
+    background-repeat: no-repeat;
+    height: 20rem;
+}
+
+#footer-text h5{
+    color: #f2c187;
+}
+
+.sem-fundo{
+    background-color: rgba(240, 248, 255, 0);
+    border-color: rgba(240, 248, 255, 0);
+}

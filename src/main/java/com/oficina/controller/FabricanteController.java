@@ -12,7 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -88,27 +89,30 @@ public class FabricanteController {
     @GetMapping("/fabricantes/delete/{id_fabricante}")
     public ModelAndView delete(@PathVariable("id_fabricante") Integer id_fabricante) {
         service.delete(id_fabricante);
-        return findAll();
+        ModelAndView mv = new ModelAndView("redirect:/fabricantes");
+        return mv;
     }
  
-    @PostMapping("/fabricantes/save")
-    public String save(@Validated Fabricante fabricante, 
+    @RequestMapping(value= "/fabricantes/save", method = RequestMethod.POST)
+    public ModelAndView save(@Validated Fabricante fabricante, 
     		Errors validacao,  
     		RedirectAttributes redirect,
     		BindingResult result, 
     		HttpServletRequest request ) {
         
+
         if(validacao.hasErrors()) {
             //return add(fabricante);
-            return "fabricantes/cadastrofabricante";
+            return new ModelAndView("fabricantes/cadastrofabricante");
         }
         
         service.save(fabricante);
-         
-        redirect.addFlashAttribute("mensagem_sucesso", "O Fabricante foi Salvo com Sucesso" );
-        String rota = fabricante.ehNovo() ? "redirect:/fabricantes/add" : "redirect:/fabricantes";
+        
+        ModelAndView mv = new ModelAndView("redirect:/fabricantes/add");
+        redirect.addFlashAttribute("mensagem_sucesso", "O Fabricante ["+fabricante.getDescFabricante()+"] foi Salvo com Sucesso" );
+        
 
-        return rota;
+        return mv;
                    
     }
 }
