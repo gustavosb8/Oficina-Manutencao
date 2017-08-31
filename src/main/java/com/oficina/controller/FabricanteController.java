@@ -102,8 +102,8 @@ public class FabricanteController {
         
 
         if(validacao.hasErrors()) {
-            //return add(fabricante);
-            return new ModelAndView("fabricantes/cadastrofabricante");
+            
+            return new ModelAndView("/fabricantes/cadastrofabricante");
         }
         
         service.save(fabricante);

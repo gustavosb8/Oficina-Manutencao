@@ -11,10 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 
 @Entity 
@@ -46,6 +47,7 @@ public class Veiculo implements Serializable{
 	private String observacao;
 	
 	@NotNull
+	@DateTimeFormat(iso=ISO.DATE)
 	@Column(name = "DT_COMPRA")
 	private Date dataCompra;
 	
@@ -58,6 +60,7 @@ public class Veiculo implements Serializable{
 	private int kilometragemCompra;
 	
 	@NotNull
+	@DateTimeFormat(iso=ISO.DATE)
 	@Column(name = "DT_VENDA")
 	private Date dataVenda;
 	

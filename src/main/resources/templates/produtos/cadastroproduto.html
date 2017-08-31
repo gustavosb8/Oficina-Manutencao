@@ -47,7 +47,8 @@
 									
 									<ul class="list-inline">
 										<li th:each="fabricante : ${FabricanteTodos}" >
-								  			<input type="checkbox"  th:value="${fabricante.idFabricante}" /> <!--erro:  th:field="${produto.fabricantes}" th:field="${produto.fabricantes}" -->
+								  			<input type="checkbox"  th:value="${fabricante.idFabricante}" />
+								  			 <!--erro:  th:field="${produto.fabricantes}" th:field="${produto.fabricantes}" -->
 								  			<label  th:text="${fabricante.descFabricante}">
 								  				Fabricante
 								  			</label>

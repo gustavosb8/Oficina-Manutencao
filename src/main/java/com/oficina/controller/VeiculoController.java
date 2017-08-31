@@ -92,7 +92,7 @@ public class VeiculoController {
     }
  
     @PostMapping("/veiculos/save")
-    public String save(@Validated Veiculo veiculo,
+    public ModelAndView save(@Validated Veiculo veiculo,
     		Integer idModelo,
     		Integer idLoja,
     		Errors validacao,  
@@ -100,19 +100,24 @@ public class VeiculoController {
     		BindingResult result, 
     		HttpServletRequest request ) {
         
+    	System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%% "+validacao.hasErrors());;
+    	
         if(validacao.hasErrors()) {
-            //return add(veiculo);
-            return "veiculos/cadastroveiculo";
+            
+        	return new ModelAndView("/veiculos/cadastroveiculo");
         }
         
         Modelo modelo = modeloService.findOne(idModelo);
         Loja loja = lojaService.findOne(idLoja);
         service.save(veiculo, modelo, loja);
-         
-        redirect.addFlashAttribute("mensagem_sucesso", "O veiculo foi Salvo com Sucesso" );
-        String rota = veiculo.ehNovo() ? "redirect:/veiculos/add" : "redirect:/veiculos";
+        
+        
+        //ModelAndView mv = new ModelAndView(veiculo.ehNovo() ? "redirect:/veiculos/add" : "redirect:/veiculos");
+        
+        ModelAndView mv = new ModelAndView("redirect:/veiculos/add");
+        redirect.addFlashAttribute("mensagem_sucesso", "O Fabricante ["+veiculo.getDescricaoCor()+" "+veiculo.getObservacao()+"] foi Salvo com Sucesso" );
 
-        return rota;
+        return mv;
                    
     }
 }
