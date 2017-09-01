@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="layout/fragmentos :: referencias"> 
+    <head> 
 		
 		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-
-		<title  id="pageTitle">Admin</title>
+		<link  th:href = "@{/css/estilos.css}" rel="stylesheet"/>
+			
+    	<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+		<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+		<link rel="icon" th:href="@{/img/favicon.png}"/>
+		<title>Admin</title>
 	</head>
 	<body>
 	  <div class="panel panel-default body-size">
 		<div class="panel-heading heading">
-    		<img src="/img/logo.png" class="img-responsive img-rounded" alt="imagem logo" width= "130"/>
+    		<img th:src="@{/img/logo.png}" class="img-responsive img-rounded" alt="imagem logo" width= "130"/>
         </div>
 		<div class="container">
 			<div class="row main">
@@ -21,11 +25,25 @@
 	               			<hr class= "divisoria">
 	               		</div>
 	               	</div>
+	               	
+	               	
 	               
 	            </div> 
-	           <fieldset>
+	            
+	            <div class="text-center">
+					<div th:if="${#bools.isTrue(param.error)}" class="alert alert-danger" 
+	             		role="alert" style="margin-top:1.5rem">Usuário ou Senha Inválida</div>
+    			</div>
+    			
+    			<div class="text-center">
+    				
+	        		<div th:if="${#bools.isTrue(param.logout)}" class="alert alert-info" 
+	             		role="alert" style="margin-top:1.5rem">Logout realizado com sucesso</div>
+				</div>
+	        
+	           <fieldset class="panel-heading">
 					<div class="main-login main-center">
-						<form class="form-login">
+						<form th:action="@{/login}" class="form-login" method="POST">
 							<div class="form-group">
 								<label for="username" class="cols-sm-2 control-label">Usuário</label>
 								<div class="cols-sm-10">
@@ -55,16 +73,18 @@
 							<div class="form-group text-right ">
 								<a th:href="@{/veiculos}">
 									
-									<button type="button" class="btn btn-primary btn-lg login-button ">
+									<button type="submit" class="btn btn-primary btn-lg login-button ">
 										Entrar
 										<span class="glyphicon glyphicon-log-in"></span>
 									</button>
 								</a>
 							</div>
 							
+							
 						</form>
 					</div>
 				</fieldset>
+			
 			</div>
 		</div>
 

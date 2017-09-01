@@ -15,4 +15,14 @@ public class HomeController {
 
         return mv;
     }
+	
+	@GetMapping("/logout")
+    public ModelAndView logout() {
+         
+        ModelAndView mv = new ModelAndView("logout");
+
+        return mv;
+    }
+	
+	
 }

@@ -1,120 +1,128 @@
 package com.oficina.model;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 
 @Entity
-public class Usuario implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class Usuario implements UserDetails {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(updatable = false )
+	private Integer id;
+
+	private String login;
+	private String senha;
 	
 	private String nome;
 	
-	private String login;
+	@Column( nullable=false )
+	private String email;
 	
-	private String senha;
+	private String telefone;
+	private boolean ativo = true;
 	
-	private boolean ativo;
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Permissao> permissoes = new HashSet<>();
 	
-	@ManyToMany
-	private List<Grupo> grupos;
-	
-	@ManyToMany
-	private List<Permissao> permissoes;
-
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getLogin() {
 		return login;
 	}
-
 	public void setLogin(String login) {
 		this.login = login;
 	}
-
 	public String getSenha() {
 		return senha;
 	}
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 	public boolean isAtivo() {
 		return ativo;
 	}
-	
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-	
-	public List<Grupo> getGrupos() {
-		return grupos;
-	}
-	
-	public void setGrupos(List<Grupo> grupos) {
-		this.grupos = grupos;
-	}
-	
-	public List<Permissao> getPermissoes() {
+
+	public Set<Permissao> getPermissoes() {
 		return permissoes;
 	}
-
-	public void setPermissoes(List<Permissao> permissoes) {
+	public void setPermissoes(Set<Permissao> permissoes) {
 		this.permissoes = permissoes;
 	}
-
+	
+	// Métodos da Interface UserDetails
+	
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.permissoes;
 	}
-
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
+	public String getPassword() {
+		return this.senha;
+	}
+	
+	@Override
+	public String getUsername() {
+		return this.email;
+	}
+	
+	@Override
+	public boolean isAccountNonExpired() {
 		return true;
 	}
-
+	
 	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", login=" + login + "]";
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		return ativo;
 	}
 }

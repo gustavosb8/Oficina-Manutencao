@@ -26,7 +26,7 @@
 
 	<link th:href = "@{/css/jquery.dataTables.min.css}" rel="stylesheet"/>
     <link  th:href = "@{/css/estilos.css}" rel="stylesheet"/>
-    <link rel="icon" href="img/favicon.png">
+    <link rel="icon" href="img/favicon.png"/>
 	<!-- <title id="pageTitle" >Cadastro de Veiculos</title> -->
 	<title>Cadastro de Veiculos</title>
 	
@@ -75,15 +75,18 @@
         </ul>
         <div class="form-inline my-2 my-md-0">
           <ul class="nav navbar-nav navbar-right painel-sair" >
-        <li class="li-sair">
-        	<a th:href="@{/}" style="padding-top: 20px;">
-        		<button type="button" class="btn btn- btn-primary" data-toggle="button" aria-pressed="false">
-	    			<span></span> 
-	  				Sair
-	  				<img th:src="@{/img/glyphicons-388-log-out.png}">
-	  			</button>
-        	</a>
-        </li>
+         <li class="li-sair"><a href="#">Seja bem vindo: 
+			<span sec:authentication="name">Visitante</span></a>
+		</li>
+		
+		<li>
+			<form th:action="@{/logout}" method="POST" style="padding-top:10px">
+				<button type="submit" class="btn btn-link"> 
+					<span class="glyphicon glyphicon-log-out" title="Sair"></span>
+					Sair
+					</button>
+			</form>  
+		</li>
       </ul>
         </div>
       </div>

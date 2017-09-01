@@ -92,10 +92,9 @@ public class VeiculoController {
     }
  
     @PostMapping("/veiculos/save")
-    public ModelAndView save(@Validated Veiculo veiculo,
+    public ModelAndView save(@Validated Veiculo veiculo, Errors validacao,
     		Integer idModelo,
     		Integer idLoja,
-    		Errors validacao,  
     		RedirectAttributes redirect,
     		BindingResult result, 
     		HttpServletRequest request ) {
