@@ -63,22 +63,21 @@ public class MontadoraController {
     }
     
     @PostMapping("/montadoras/save")
-    public String save(@Validated Montadora montadora, 
+    public ModelAndView save(@Validated Montadora montadora, Errors validacao, 
     		BindingResult result,
-    		Errors validacao,  
     		RedirectAttributes redirect,
     		HttpServletRequest request ) {
         
         if(validacao.hasErrors()) {
             //return add(montadora);
-            return "montadoras/cadastromontadora";
+            return new ModelAndView("/montadoras/cadastromontadora");
         }
 
         service.save(montadora);
         
-        redirect.addFlashAttribute("mensagem_sucesso", "Montadora Salvo com Sucesso" );
-        String rota = montadora.ehNovo() ? "redirect:/montadoras/add" : "redirect:/montadoras";
+        ModelAndView mv = new ModelAndView("redirect:/montadoras/add");
+        redirect.addFlashAttribute("mensagem_sucesso", "Montadora ["+montadora.getDescricaoMontadora()+"] Salvo com Sucesso" );
 
-        return rota;
+        return mv;
     }
 }

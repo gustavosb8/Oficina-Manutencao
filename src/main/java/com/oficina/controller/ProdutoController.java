@@ -86,23 +86,22 @@ public class ProdutoController {
     }
  
     @PostMapping("/produtos/save")
-    public String save(@Validated Produto produto, 
-    		Errors validacao,  
+    public ModelAndView save(@Validated Produto produto, Errors validacao, 
     		RedirectAttributes redirect,
     		BindingResult result, 
     		HttpServletRequest request ) {
         
         if(validacao.hasErrors()) {
             //return add(produto);
-            return "produtos/cadastroproduto";
+            return new ModelAndView("/produtos/cadastroproduto");
         }
          
         service.save(produto);
-         
-        redirect.addFlashAttribute("mensagem_sucesso", "O Produto foi Salvo com Sucesso" );
-        String rota = produto.ehNovo() ? "redirect:/produtos/add" : "redirect:/produtos";
+        
+        ModelAndView mv = new ModelAndView("redirect:/produtos/add"); 
+        redirect.addFlashAttribute("mensagem_sucesso", "O Produto ["+produto.getDescProduto()+"] foi Salvo com Sucesso" );
 
-        return rota;
+        return mv;
                    
     }
 }

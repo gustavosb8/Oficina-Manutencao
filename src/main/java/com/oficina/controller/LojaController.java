@@ -77,26 +77,25 @@ public class LojaController {
     }
     
     @PostMapping("/lojas/save")
-    public String save(@Validated Loja loja, 
+    public ModelAndView save(@Validated Loja loja, Errors validacao, 
     		Integer idMontadora,
     		BindingResult result,
-    		Errors validacao,  
+    		 
     		RedirectAttributes redirect,
     		HttpServletRequest request ) {
         
         if(validacao.hasErrors()) {
             //return add(loja);
-            return "lojas/cadastroloja";
+            return new ModelAndView("/lojas/cadastroloja");
         }
         
         
         Montadora montadora = montadoraService.findOne(idMontadora);
         service.save(loja, montadora);
         
-        
-        redirect.addFlashAttribute("mensagem_sucesso", "A loja foi Salva com Sucesso" );
-        String rota = loja.ehNovo() ? "redirect:/lojas/add" : "redirect:/lojas";
+        ModelAndView mv = new ModelAndView("redirect:/lojas/add");
+        redirect.addFlashAttribute("mensagem_sucesso", "A loja ["+loja.getNomeLoja()+"] foi Salva com Sucesso" );
 
-        return rota;
+        return mv;
     }
 }

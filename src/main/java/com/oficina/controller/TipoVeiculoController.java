@@ -62,23 +62,22 @@ public class TipoVeiculoController {
     }
  
     @PostMapping("/tipoveiculos/save")
-    public String save(@Validated TipoVeiculo tpVeiculo, 
-    		Errors validacao,  
+    public ModelAndView save(@Validated TipoVeiculo tpVeiculo, Errors validacao, 
     		RedirectAttributes redirect,
     		BindingResult result, 
     		HttpServletRequest request ) {
         
         if(validacao.hasErrors()) {
             //return add(tpVeiculo);
-            return "tipoveiculos/cadastrotipoveiculo";
+            return new ModelAndView("/tipoveiculos/cadastrotipoveiculo");
         }
          
         service.save(tpVeiculo);
          
-        redirect.addFlashAttribute( "mensagem_sucesso", "Salvo com Sucesso" );
-        String rota = tpVeiculo.ehNovo() ? "redirect:/tipoveiculos/add" : "redirect:/tipoveiculos";
+        ModelAndView mv = new ModelAndView("redirect:/tipoveiculos/add");
+        redirect.addFlashAttribute( "mensagem_sucesso", "Tipo Veiculo ["+tpVeiculo.getDesc_tipoVeiculo()+"] Salvo com Sucesso" );
 
-        return rota;
+        return mv;
                    
     }
 }

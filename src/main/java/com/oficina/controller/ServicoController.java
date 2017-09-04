@@ -63,23 +63,22 @@ public class ServicoController {
     }
  
     @PostMapping("/servicos/save")
-    public String save(@Validated Servico servico, 
-    		Errors validacao,  
+    public ModelAndView save(@Validated Servico servico, Errors validacao, 
     		RedirectAttributes redirect,
     		BindingResult result, 
     		HttpServletRequest request ) {
         
         if(validacao.hasErrors()) {
             //return add(servico);
-            return "servicos/cadastroservico";
+            return new ModelAndView("/servicos/cadastroservico");
         }
         
         service.save(servico);
          
-        redirect.addFlashAttribute("mensagem_sucesso", "O serviço foi Salvo com Sucesso" );
-        String rota = servico.ehNovo() ? "redirect:/servicos/add" : "redirect:/servicos";
+        ModelAndView mv = new ModelAndView("redirect:/servicos/add");
+        redirect.addFlashAttribute("mensagem_sucesso", "O serviço ["+servico.getDescServico()+"] foi Salvo com Sucesso" );
 
-        return rota;
+        return mv;
                    
     }
 }

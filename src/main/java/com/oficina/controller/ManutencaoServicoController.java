@@ -90,25 +90,24 @@ public class ManutencaoServicoController {
     }
     
     @PostMapping("/manutencaoservicos/save")
-    public String save(@Validated ManutencaoServico manutencaoServico, 
+    public ModelAndView save(@Validated ManutencaoServico manutencaoServico, Errors validacao,  
     		Integer idManutencao,
     		Integer idServico,
     		BindingResult result,
-    		Errors validacao,  
     		RedirectAttributes redirect,
     		HttpServletRequest request ) {
         
         if(validacao.hasErrors()) {
             //return add(manutencaoService);
-            return "manutencaoservicos/cadastromanutencaoservico";
+            return new ModelAndView("/manutencaoservicos/cadastromanutencaoservico");
         }
         Manutencao manutencao = manutencaoService.findOne(idManutencao);
         Servico servico = servicoService.findOne(idServico);
         service.save(manutencaoServico, manutencao, servico);
         
-        redirect.addFlashAttribute("mensagem_sucesso", "Salvo com Sucesso" );
-        String rota = manutencaoServico.ehNovo() ? "redirect:/manutencaoservicos/add" : "redirect:/manutencaoservicos";
-
-        return rota;
+        ModelAndView mv = new ModelAndView("redirect:/manutencaoservicos/add");
+        redirect.addFlashAttribute("mensagem_sucesso", "["+manutencaoServico.getValorCobrado()+"] "+"Salvo com Sucesso" );
+        
+        return mv;
     }
 }

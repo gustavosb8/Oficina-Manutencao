@@ -99,8 +99,6 @@ public class VeiculoController {
     		BindingResult result, 
     		HttpServletRequest request ) {
         
-    	System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%% "+validacao.hasErrors());;
-    	
         if(validacao.hasErrors()) {
             
         	return new ModelAndView("/veiculos/cadastroveiculo");
@@ -111,10 +109,8 @@ public class VeiculoController {
         service.save(veiculo, modelo, loja);
         
         
-        //ModelAndView mv = new ModelAndView(veiculo.ehNovo() ? "redirect:/veiculos/add" : "redirect:/veiculos");
-        
         ModelAndView mv = new ModelAndView("redirect:/veiculos/add");
-        redirect.addFlashAttribute("mensagem_sucesso", "O Fabricante ["+veiculo.getDescricaoCor()+" "+veiculo.getObservacao()+"] foi Salvo com Sucesso" );
+        redirect.addFlashAttribute("mensagem_sucesso", "O Veiculo ["+veiculo.getDescricaoCor()+" "+veiculo.getObservacao()+"] foi Salvo com Sucesso" );
 
         return mv;
                    

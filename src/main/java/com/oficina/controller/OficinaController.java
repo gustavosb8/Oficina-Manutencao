@@ -77,24 +77,23 @@ public class OficinaController {
     }
     
     @PostMapping("/oficinas/save")
-    public String save(@Validated Oficina oficina, 
+    public ModelAndView save(@Validated Oficina oficina, Errors validacao, 
     		Integer idMontadora,
     		BindingResult result,
-    		Errors validacao,  
     		RedirectAttributes redirect,
     		HttpServletRequest request ) {
         
         if(validacao.hasErrors()) {
             //return add(Oficina);
-            return "oficinas/cadastrooficina";
+            return new ModelAndView("/oficinas/cadastrooficina");
         }
         
         Montadora montadora = montadoraService.findOne(idMontadora);
         service.save(oficina, montadora);
         
-        redirect.addFlashAttribute("mensagem_sucesso", "A oficina foi Salva com Sucesso" );
-        String rota = oficina.ehNovo() ? "redirect:/oficinas/add" : "redirect:/oficinas";
+        ModelAndView mv = new ModelAndView("redirect:/oficinas/add");
+        redirect.addFlashAttribute("mensagem_sucesso", "A oficina ["+oficina.getDescricaoOficina()+"] foi Salva com Sucesso" );
 
-        return rota;
+        return mv;
     }
 }

@@ -90,17 +90,16 @@ public class ModeloController {
     }
     
     @PostMapping("/modelos/save")
-    public String save(@Validated Modelo modelo, 
+    public ModelAndView save(@Validated Modelo modelo, Errors validacao,
     		Integer idMontadora,
     		Integer idTipoVeiculo,
     		BindingResult result,
-    		Errors validacao,  
     		RedirectAttributes redirect,
     		HttpServletRequest request ) {
         
         if(validacao.hasErrors()) {
             //return add(Modelo);
-            return "modelos/cadastromodelo";
+            return new ModelAndView("/modelos/cadastromodelo");
         }
       
         
@@ -108,10 +107,9 @@ public class ModeloController {
         TipoVeiculo tpVeiculo = tpService.findOne(idTipoVeiculo);
         service.save(modelo, montadora, tpVeiculo);
         
-        
-        redirect.addFlashAttribute("mensagem_sucesso", "O Modelo foi Salvo com Sucesso" );
-        String rota = modelo.ehNovo() ? "redirect:/modelos/add" : "redirect:/modelos";
+        ModelAndView mv = new ModelAndView("redirect:/modelos/add");
+        redirect.addFlashAttribute("mensagem_sucesso", "O Modelo ["+modelo.getDescModelo()+"] foi Salvo com Sucesso" );
 
-        return rota;
+        return mv;
     }
 }

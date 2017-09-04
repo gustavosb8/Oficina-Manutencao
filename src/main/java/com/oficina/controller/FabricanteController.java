@@ -94,8 +94,8 @@ public class FabricanteController {
     }
  
     @RequestMapping(value= "/fabricantes/save", method = RequestMethod.POST)
-    public ModelAndView save(@Validated Fabricante fabricante, 
-    		Errors validacao,  
+    public ModelAndView save(@Validated Fabricante fabricante, Errors validacao, 
+    		 
     		RedirectAttributes redirect,
     		BindingResult result, 
     		HttpServletRequest request ) {

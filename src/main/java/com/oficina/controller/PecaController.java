@@ -77,24 +77,24 @@ public class PecaController {
     }
  
     @PostMapping("/pecas/save")
-    public String save(@Validated Peca peca, 
+    public ModelAndView save(@Validated Peca peca, Errors validacao, 
     		Integer idFabricante, /* vetor de id's*/
-    		Errors validacao,  
     		RedirectAttributes redirect,
     		BindingResult result, 
     		HttpServletRequest request ) {
         
         if(validacao.hasErrors()) {
             //return add(peca);
-            return "pecas/cadastropeca";
+            return new ModelAndView("/pecas/cadastropeca");
         }
         peca.getFabricantes().add(fabricanteService.findOne(idFabricante)); /*Alterar para list*/
         service.save(peca);
          
-        redirect.addFlashAttribute("mensagem_sucesso", "A peça foi Salva com Sucesso" );
-        String rota = peca.ehNovo() ? "redirect:/pecas/add" : "redirect:/pecas";
+        ModelAndView mv = new ModelAndView("redirect:/pecas/add");
+        redirect.addFlashAttribute("mensagem_sucesso", "A peça ["+peca.getDescPeca()+"] foi Salva com Sucesso" );
+        
 
-        return rota;
+        return mv;
                    
     }
 }
