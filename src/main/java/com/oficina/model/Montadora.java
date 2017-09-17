@@ -24,12 +24,12 @@ public class Montadora implements Serializable{
 	@Column(name = "ID_MONTADORA")
 	private Integer idMontadora;
 	
-	@NotEmpty
+	@NotEmpty (message="{descricao.obrigatorio}")
 	@Size(min=2)
 	@Column(name = "DS_MONTADORA")
 	private String descricaoMontadora;
 
-	@NotEmpty
+	@NotEmpty (message="{descricao.obrigatorio}")
 	@Size(min=2)
 	@Column(name = "DS_ORIGEM")
 	private String descricaoOrigem;

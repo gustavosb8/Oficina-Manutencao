@@ -28,7 +28,7 @@ public class Manutencao implements Serializable{
 	@Column(name = "ID_MANUTENCAO")
 	private Integer idManutencao;
 	
-	@NotEmpty
+	@NotEmpty (message="{descricao.obrigatorio}")
 	@Size(min=2)
 	@Column(name = "DS_MANUTENCAO")
 	private String descricaoManutencao;

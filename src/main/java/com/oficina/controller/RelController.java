@@ -50,6 +50,44 @@ public class RelController {
 	    JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 
 	  }
+	
+	@GetMapping("/pecas/buscatodos")
+    public void buscaPecas(HttpServletResponse respostaHttp) throws JRException, IOException, SQLException {
+		
+		InputStream jasperStream = this.getClass().getResourceAsStream("/Relatorios/pecas.jasper");
+		  
+	    Map<String,Object> params = new HashMap<>();
+	    	     
+	    JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
+	    
+	    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params,  obterConexaoJDBC() );
+
+	    respostaHttp.setContentType("application/x-pdf");
+	    respostaHttp.setHeader("Content-disposition", "inline; filename=relatorio-pecas.pdf");
+
+	    final OutputStream outStream = respostaHttp.getOutputStream();
+	    JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+
+	  }
+	
+	@GetMapping("/produtos/buscatodos")
+    public void buscaProdutos(HttpServletResponse respostaHttp) throws JRException, IOException, SQLException {
+		
+		InputStream jasperStream = this.getClass().getResourceAsStream("/Relatorios/produtos.jasper");
+		  
+	    Map<String,Object> params = new HashMap<>();
+	    	     
+	    JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
+	    
+	    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params,  obterConexaoJDBC() );
+
+	    respostaHttp.setContentType("application/x-pdf");
+	    respostaHttp.setHeader("Content-disposition", "inline; filename=relatorio-produtos.pdf");
+
+	    final OutputStream outStream = respostaHttp.getOutputStream();
+	    JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+
+	  }
 
 	private Connection obterConexaoJDBC() throws SQLException {
 		//return DriverManager.getConnection("jdbc:mysql://localhost/bookstore?useSSL=false", "root", "root" );

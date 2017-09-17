@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 //import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,15 +30,15 @@ public class Produto implements Serializable{
 	@Column(name = "ID_PRODUTO")
 	private Long idProduto;
 	
-	@NotEmpty
+	@NotEmpty (message="{descricao.obrigatorio}")
 	@Size(min=2)
 	@Column(name = "DS_PRODUTO")
 	private String descProduto;
 	
 	/**** JPA ****/
 	
-	@ManyToMany
-	private List<Fabricante> fabricantes;
+	@ManyToOne
+	private Fabricante fabricante;
 	
 	@OneToMany(mappedBy = "produto")
 	private List<ManutencaoProduto> manutencaoProdutos;
@@ -60,26 +60,22 @@ public class Produto implements Serializable{
 	public void setDescProduto(String descProduto) {
 		this.descProduto = descProduto;
 	}
-	
-	public String getFabricantes() {
-		
-		String fabricantes = "";
-		for(int i = 0; i < this.fabricantes.size(); i++){
-			fabricantes = fabricantes + this.fabricantes.get(i).getDescFabricante();
-		}
-		
-		System.out.println(fabricantes);
-		return fabricantes;
-	}
-	
-	public List<Fabricante> getFabricante(){
-		return fabricantes;
+
+	public Fabricante getFabricante() {
+		return fabricante;
 	}
 
-	public void setFabricantes(List<Fabricante> fabricantes) {
-		this.fabricantes = fabricantes;
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
 	}
 
+	public List<ManutencaoProduto> getManutencaoProdutos() {
+		return manutencaoProdutos;
+	}
+
+	public void setManutencaoProdutos(List<ManutencaoProduto> manutencaoProdutos) {
+		this.manutencaoProdutos = manutencaoProdutos;
+	}
 
 	@Override
 	public String toString() {

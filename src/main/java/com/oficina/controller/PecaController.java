@@ -77,8 +77,7 @@ public class PecaController {
     }
  
     @PostMapping("/pecas/save")
-    public ModelAndView save(@Validated Peca peca, Errors validacao, 
-    		Integer idFabricante, /* vetor de id's*/
+    public ModelAndView save(@Validated Peca peca, Errors validacao,
     		RedirectAttributes redirect,
     		BindingResult result, 
     		HttpServletRequest request ) {
@@ -87,7 +86,7 @@ public class PecaController {
             //return add(peca);
             return new ModelAndView("/pecas/cadastropeca");
         }
-        peca.getFabricantes().add(fabricanteService.findOne(idFabricante)); /*Alterar para list*/
+        
         service.save(peca);
          
         ModelAndView mv = new ModelAndView("redirect:/pecas/add");

@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -25,7 +25,7 @@ public class Peca implements Serializable{
 	@Column(name = "ID_PECA")
 	private Integer idPeca;
 	
-	@NotEmpty
+	@NotEmpty (message="{descricao.obrigatorio}")
 	@Size(min=2)
 	@Column(name = "DS_PECA")
 	private String descPeca;
@@ -38,13 +38,13 @@ public class Peca implements Serializable{
 	
 	/**** JPA ****/
 
-	@ManyToMany
-	private List<Fabricante> fabricantes;
+	@ManyToOne
+	private Fabricante fabricante;
 	
 	@OneToMany(mappedBy = "peca")
 	private List<ManutencaoPeca> manutencaoPecas;
 	
-	
+	/**** JPA ****/
 	
 	public Integer getIdPeca() {
 		return idPeca;
@@ -61,13 +61,13 @@ public class Peca implements Serializable{
 	public void setDescPeca(String descPeca) {
 		this.descPeca = descPeca;
 	}
-	
-	public List<Fabricante> getFabricantes() {
-		return fabricantes;
+
+	public Fabricante getFabricante() {
+		return fabricante;
 	}
 
-	public void setFabricantes(List<Fabricante> fabricantes) {
-		this.fabricantes = fabricantes;
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
 	}
 
 	public List<ManutencaoPeca> getManutencaoPecas() {

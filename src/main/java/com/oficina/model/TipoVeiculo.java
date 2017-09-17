@@ -25,7 +25,7 @@ public class TipoVeiculo implements Serializable{
 	@Column(name = "ID_TIPO_VEICULO")
 	private Integer idTipoVeiculo;
 	
-	@NotEmpty
+	@NotEmpty (message="{descricao.obrigatorio}")
 	@Size(min=2)
 	@Column(name = "DS_TIPO_VEICULO")
 	private String desc_tipoVeiculo;

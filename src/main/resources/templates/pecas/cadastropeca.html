@@ -40,10 +40,10 @@
                         <div class="form-group row">
                             <div class="col-md-4 form-imput">
                             	<label>Fabricantes</label> 
-                                <select name="idFabricante" class="form-control">
-									<option data-th-each="fabricante : ${FabricanteTodos}"
-									      	data-th-value="${fabricante.idFabricante}" 
-									      	data-th-text="${fabricante.descFabricante}"></option>
+                                <select th:field="*{fabricante}" name="idFabricante" class="form-control">
+									<option th:each="fabricante : ${FabricanteTodos}"
+									      	th:value="${fabricante.idFabricante}" 
+									      	th:text="${fabricante.descFabricante}"></option>
 								</select>
                             </div>
                         </div>

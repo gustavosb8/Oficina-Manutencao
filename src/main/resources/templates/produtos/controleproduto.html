@@ -30,7 +30,7 @@
                         <tr th:each="produto : ${produtos}">
                             <td th:text="${produto.idProduto}"></td>
                             <td th:text="${produto.descProduto}"></td>
-                            <td></td>  <!-- th:text="${protudo.getFabricantes()}" -->
+                            <td th:text="${produto.fabricante}"> </td>
                             
                             <td>
                                 <div class="btn-group pull-right">

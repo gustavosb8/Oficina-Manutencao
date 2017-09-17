@@ -25,7 +25,7 @@ public class Loja implements Serializable{
 	@Column(name = "ID_LOJA")
 	private Integer idLoja;
 	
-	@NotEmpty
+	@NotEmpty (message="{descricao.obrigatorio}")
 	@Size(min=2)
 	@Column(name = "DS_NOME")
 	private String nomeLoja;

@@ -25,7 +25,7 @@ public class Modelo implements Serializable{
 	@Column(name = "ID_MODELO")
 	private Integer idModelo;
 	
-	@NotEmpty
+	@NotEmpty (message="{descricao.obrigatorio}")
 	@Size(min=2)
 	@Column(name = "DS_MODELO")
 	private String descModelo;

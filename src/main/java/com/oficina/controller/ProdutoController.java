@@ -60,13 +60,6 @@ public class ProdutoController {
 		return fabricantes;
 	}
     
-    /*
-    @ModelAttribute("fabricantesProduto")
-    public List<Fabricante> todas(@PathVariable("id_produto") Long idProduto) {
-    	Produto produto = service.findOne(idProduto);
-		return produto.getFabricante();
-	}
-    */
     
     @GetMapping("/produtos/edit/{id_produto}")
     public ModelAndView edit(@PathVariable("id_produto") Long id_produto) {

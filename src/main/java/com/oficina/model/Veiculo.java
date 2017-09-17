@@ -30,7 +30,7 @@ public class Veiculo implements Serializable{
 	@Column(name = "ID_RENAVAM")
 	private Integer idRenavam;
 	
-	@NotEmpty
+	@NotEmpty (message="{descricao.obrigatorio}")
 	@Column(name = "DS_COR")
 	private String descricaoCor;
 	

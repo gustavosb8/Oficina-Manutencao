@@ -24,7 +24,7 @@ public class Fabricante implements Serializable{
 	@Column(name = "ID_FABRICANTE")
 	private Integer idFabricante;
 	
-	@NotEmpty(message="O campo descrição não pode estar vazio")
+	@NotEmpty (message="{descricao.obrigatorio}")
 	@Size(min=2, message="Descrição deve ser maior")
 	@Column(name = "DS_FABRICANTE")
 	private String descFabricante;
@@ -33,6 +33,12 @@ public class Fabricante implements Serializable{
 	
 	@OneToMany(mappedBy = "fabricante")
 	private List<ManutencaoPeca> manutencaoPecas;
+	
+	@OneToMany(mappedBy = "fabricante")
+	private List<Produto> produtos;
+	
+	@OneToMany(mappedBy = "fabricante")
+	private List<Peca> pecas;
 	
 	
 	/**** JPA ****/
@@ -53,7 +59,29 @@ public class Fabricante implements Serializable{
 		this.descFabricante = descFabricante;
 	}
 	
-	
+	public List<ManutencaoPeca> getManutencaoPecas() {
+		return manutencaoPecas;
+	}
+
+	public void setManutencaoPecas(List<ManutencaoPeca> manutencaoPecas) {
+		this.manutencaoPecas = manutencaoPecas;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
+	public List<Peca> getPecas() {
+		return pecas;
+	}
+
+	public void setPecas(List<Peca> pecas) {
+		this.pecas = pecas;
+	}
 
 	@Override
 	public String toString() {

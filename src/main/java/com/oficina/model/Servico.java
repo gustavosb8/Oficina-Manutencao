@@ -24,7 +24,7 @@ public class Servico implements Serializable{
 	@Column(name = "ID_SERVICO")
 	private Integer idServico;
 	
-	@NotEmpty
+	@NotEmpty (message="{descricao.obrigatorio}")
 	@Size(min=2)
 	@Column(name = "DS_SERVICO")
 	private String descServico;

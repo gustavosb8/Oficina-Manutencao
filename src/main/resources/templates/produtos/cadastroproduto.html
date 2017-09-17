@@ -38,30 +38,17 @@
                                 <textarea class="form-control input-sm" th:field="*{descProduto}" cols="5" rows="5" placeholder="Informe a Descricao"></textarea>
                             </div>
                         </div> 
-                        
-                        <div class="form-group row">
-							<div class="col-md-4 form-imput">
-								<label>Selecione os Fabricantes relacionados:</label>
-								<div class="panel panel-default">
-								<div class="container">
-									
-									<ul class="list-inline">
-										<li th:each="fabricante : ${FabricanteTodos}" >
-								  			<input type="checkbox"  th:value="${fabricante.idFabricante}" />
-								  			 <!--erro:  th:field="${produto.fabricantes}" th:field="${produto.fabricantes}" -->
-								  			<label  th:text="${fabricante.descFabricante}">
-								  				Fabricante
-								  			</label>
-								  			
-								  			<!-- 
-								  			 th:for="${#ids.prev('fabricantes')}"
-								  			-->						  
-										</li>
-									</ul>
-								</div>
-								</div>
-           					</div>
-         				</div>
+         				
+         				 <div class="form-group row">
+                            <div class="col-md-4 form-imput">
+                            	<label>Fabricantes</label> 
+                                <select th:field="*{fabricante}" name="idFabricante" class="form-control">
+									<option th:each="fabricante : ${FabricanteTodos}"
+									      	th:value="${fabricante.idFabricante}" 
+									      	th:text="${fabricante.descFabricante}"></option>
+								</select>
+                            </div>
+                        </div>
                                                
                     </fieldset>
                 </div>

@@ -25,7 +25,7 @@ public class Oficina implements Serializable{
 	@Column(name = "ID_OFICINA")
 	private Integer idOficina;
 	
-	@NotEmpty
+	@NotEmpty (message="{descricao.obrigatorio}")
 	@Size(min=2)
 	@Column(name = "DS_OFICINA")
 	private String descricaoOficina;
