@@ -17,7 +17,13 @@ public class ConexaoComponente {
 	public Connection obterConexaoJDBC() {
 		
 		try {
-			return DriverManager.getConnection("jdbc:mysql://us-cdbr-iron-east-05.cleardb.net?useSSL=false", "b5d5378030c6dd", "046740c1" );
+			
+			
+			
+			//return DriverManager.getConnection("jdbc:mysql://localhost/bd_oficina?useSSL=false", "root", "senharoot" );
+			
+			//via banco nuvem
+			return DriverManager.getConnection("jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_fa3e0d6879b26f7?reconnect=true", "b5d5378030c6dd", "046740c1" );
 		
 		} catch (SQLException e) {
 			LOG.error("Erro ao obter conexão JDBC");
