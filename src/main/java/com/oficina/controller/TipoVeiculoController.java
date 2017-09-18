@@ -27,7 +27,7 @@ public class TipoVeiculoController {
     @GetMapping("/tipoveiculos")
     public ModelAndView findAll() {
          
-        ModelAndView mv = new ModelAndView("/tipoveiculos/controletipoveiculo");
+        ModelAndView mv = new ModelAndView("tipoveiculos/controletipoveiculo");
         List<TipoVeiculo> tpveiculos = service.findAll();
         /*System.out.println("***** " + tpveiculos );*/
 		mv.addObject("tpveiculos", tpveiculos);  
@@ -38,7 +38,7 @@ public class TipoVeiculoController {
     @GetMapping("/tipoveiculos/add")
     public ModelAndView add(TipoVeiculo tpveiculos) {
  
-        ModelAndView mv = new ModelAndView("/tipoveiculos/cadastrotipoveiculo");
+        ModelAndView mv = new ModelAndView("tipoveiculos/cadastrotipoveiculo");
         mv.addObject("tpveiculos", tpveiculos);
 
         return mv;
@@ -49,7 +49,7 @@ public class TipoVeiculoController {
          
     	TipoVeiculo tipoVeiculo = service.findOne(id_tpveiculos);
 		
-		ModelAndView modelAndView = new ModelAndView("/tipoveiculos/cadastrotipoveiculo");
+		ModelAndView modelAndView = new ModelAndView("tipoveiculos/cadastrotipoveiculo");
 		modelAndView.addObject("tipoVeiculo", tipoVeiculo);
 		
 		return modelAndView;
@@ -69,7 +69,7 @@ public class TipoVeiculoController {
         
         if(validacao.hasErrors()) {
             //return add(tpVeiculo);
-            return new ModelAndView("/tipoveiculos/cadastrotipoveiculo");
+            return new ModelAndView("tipoveiculos/cadastrotipoveiculo");
         }
          
         service.save(tpVeiculo);

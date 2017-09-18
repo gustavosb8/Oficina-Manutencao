@@ -35,7 +35,7 @@ public class RelController {
 	@GetMapping("/fabricantes/buscatodos")
     public void buscaFabricantes(HttpServletResponse respostaHttp) throws JRException, IOException, SQLException {
 		
-		InputStream jasperStream = this.getClass().getResourceAsStream("/Relatorios/fabricantes.jasper");
+		InputStream jasperStream = this.getClass().getResourceAsStream("Relatorios/fabricantes.jasper");
 		  
 	    Map<String,Object> params = new HashMap<>();
 	    	     
@@ -54,7 +54,7 @@ public class RelController {
 	@GetMapping("/pecas/buscatodos")
     public void buscaPecas(HttpServletResponse respostaHttp) throws JRException, IOException, SQLException {
 		
-		InputStream jasperStream = this.getClass().getResourceAsStream("/Relatorios/pecas.jasper");
+		InputStream jasperStream = this.getClass().getResourceAsStream("Relatorios/pecas.jasper");
 		  
 	    Map<String,Object> params = new HashMap<>();
 	    	     
@@ -73,7 +73,7 @@ public class RelController {
 	@GetMapping("/produtos/buscatodos")
     public void buscaProdutos(HttpServletResponse respostaHttp) throws JRException, IOException, SQLException {
 		
-		InputStream jasperStream = this.getClass().getResourceAsStream("/Relatorios/produtos.jasper");
+		InputStream jasperStream = this.getClass().getResourceAsStream("Relatorios/produtos.jasper");
 		  
 	    Map<String,Object> params = new HashMap<>();
 	    	     

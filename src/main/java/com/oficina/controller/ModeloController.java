@@ -40,7 +40,7 @@ public class ModeloController {
     public ModelAndView findAll() {
          
 	 /********************ALTERAR*******************************/
-        ModelAndView mv = new ModelAndView("/modelos/controlemodelo");
+        ModelAndView mv = new ModelAndView("modelos/controlemodelo");
         List<Modelo> modelos = service.findAll();
         System.out.println("***** " + modelos );
         
@@ -52,7 +52,7 @@ public class ModeloController {
 	@GetMapping("/modelos/add")
     public ModelAndView add(Modelo modelo) {
          
-        ModelAndView mv = new ModelAndView("/modelos/cadastromodelo");
+        ModelAndView mv = new ModelAndView("modelos/cadastromodelo");
         mv.addObject("modelo", modelo);
          
         return mv;
@@ -77,7 +77,7 @@ public class ModeloController {
          
 		Modelo modelo = service.findOne(id_modelo);
 		
-		ModelAndView modelAndView = new ModelAndView("/modelos/cadastromodelo");
+		ModelAndView modelAndView = new ModelAndView("modelos/cadastromodelo");
 		modelAndView.addObject("modelo", modelo);
 		
 		return modelAndView;
@@ -99,7 +99,7 @@ public class ModeloController {
         
         if(validacao.hasErrors()) {
             //return add(Modelo);
-            return new ModelAndView("/modelos/cadastromodelo");
+            return new ModelAndView("modelos/cadastromodelo");
         }
       
         

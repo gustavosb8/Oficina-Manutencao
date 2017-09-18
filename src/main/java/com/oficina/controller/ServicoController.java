@@ -27,7 +27,7 @@ public class ServicoController {
     @GetMapping("/servicos")
     public ModelAndView findAll() {
          
-        ModelAndView mv = new ModelAndView("/servicos/controleservico");
+        ModelAndView mv = new ModelAndView("servicos/controleservico");
         List<Servico> servicos = service.findAll();
         /*System.out.println("***** " + servicos );*/
         
@@ -39,7 +39,7 @@ public class ServicoController {
     @GetMapping("/servicos/add")
     public ModelAndView add(Servico servico) {
  
-        ModelAndView mv = new ModelAndView("/servicos/cadastroservico");
+        ModelAndView mv = new ModelAndView("servicos/cadastroservico");
         mv.addObject("servico", servico);
 
         return mv;
@@ -50,7 +50,7 @@ public class ServicoController {
          
     	Servico servico = service.findOne(id_servico );
 		
-		ModelAndView modelAndView = new ModelAndView("/servicos/cadastroservico");
+		ModelAndView modelAndView = new ModelAndView("servicos/cadastroservico");
 		modelAndView.addObject("servico", servico);
 		
 		return modelAndView;
@@ -70,7 +70,7 @@ public class ServicoController {
         
         if(validacao.hasErrors()) {
             //return add(servico);
-            return new ModelAndView("/servicos/cadastroservico");
+            return new ModelAndView("servicos/cadastroservico");
         }
         
         service.save(servico);

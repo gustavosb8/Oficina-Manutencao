@@ -39,7 +39,7 @@ public class ManutencaoServicoController {
     public ModelAndView findAll() {
          
 	 /********************ALTERAR*******************************/
-        ModelAndView mv = new ModelAndView("/manutencaoservicos/controlemanutencaoservico");
+        ModelAndView mv = new ModelAndView("manutencaoservicos/controlemanutencaoservico");
         List<ManutencaoServico> manutencaoservicos = service.findAll();
         System.out.println("***** " + manutencaoservicos );
         
@@ -51,7 +51,7 @@ public class ManutencaoServicoController {
 	@GetMapping("/manutencaoservicos/add")
     public ModelAndView add(ManutencaoServico manutencaoservico) {
          
-        ModelAndView mv = new ModelAndView("/manutencaoservicos/cadastromanutencaoservico");
+        ModelAndView mv = new ModelAndView("manutencaoservicos/cadastromanutencaoservico");
         mv.addObject("manutencaoServico", manutencaoservico);
         System.out.println("##################################"+manutencaoservico);
          
@@ -77,7 +77,7 @@ public class ManutencaoServicoController {
          
     	ManutencaoServico manutencaoServico = service.findOne(id);
 		
-		ModelAndView modelAndView = new ModelAndView("/manutencaoservicos/cadastromanutencaoservico");
+		ModelAndView modelAndView = new ModelAndView("manutencaoservicos/cadastromanutencaoservico");
 		modelAndView.addObject("manutencaoServico", manutencaoServico);
 		
 		return modelAndView;
@@ -99,7 +99,7 @@ public class ManutencaoServicoController {
         
         if(validacao.hasErrors()) {
             //return add(manutencaoService);
-            return new ModelAndView("/manutencaoservicos/cadastromanutencaoservico");
+            return new ModelAndView("manutencaoservicos/cadastromanutencaoservico");
         }
         Manutencao manutencao = manutencaoService.findOne(idManutencao);
         Servico servico = servicoService.findOne(idServico);

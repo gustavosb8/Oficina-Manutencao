@@ -39,7 +39,7 @@ public class FabricanteController {
     @GetMapping("/fabricantes")
     public ModelAndView findAll() {
          
-        ModelAndView mv = new ModelAndView("/fabricantes/controlefabricante");
+        ModelAndView mv = new ModelAndView("fabricantes/controlefabricante");
         List<Fabricante> fabricantes = service.findAll();
         /*System.out.println("***** " + fabricantes );*/
         
@@ -54,7 +54,7 @@ public class FabricanteController {
     @GetMapping("/fabricantes/add")
     public ModelAndView add(Fabricante fabricante) {
  
-        ModelAndView mv = new ModelAndView("/fabricantes/cadastrofabricante");
+        ModelAndView mv = new ModelAndView("fabricantes/cadastrofabricante");
         mv.addObject("fabricante", fabricante);
 
         return mv;
@@ -80,7 +80,7 @@ public class FabricanteController {
          
     	Fabricante fabricante = service.findOne(id_fabricante );
 		
-		ModelAndView modelAndView = new ModelAndView("/fabricantes/cadastrofabricante");
+		ModelAndView modelAndView = new ModelAndView("fabricantes/cadastrofabricante");
 		modelAndView.addObject("fabricante", fabricante);
 		
 		return modelAndView;
@@ -103,7 +103,7 @@ public class FabricanteController {
 
         if(validacao.hasErrors()) {
             
-            return new ModelAndView("/fabricantes/cadastrofabricante");
+            return new ModelAndView("fabricantes/cadastrofabricante");
         }
         
         service.save(fabricante);

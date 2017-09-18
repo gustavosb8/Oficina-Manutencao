@@ -34,7 +34,7 @@ public class ProdutoController {
     @GetMapping("/produtos")
     public ModelAndView findAll() {
          
-        ModelAndView mv = new ModelAndView("/produtos/controleproduto");
+        ModelAndView mv = new ModelAndView("produtos/controleproduto");
         List<Produto> produtos = service.findAll();
         /*System.out.println("***** " + produtos );*/
         
@@ -47,7 +47,7 @@ public class ProdutoController {
     @GetMapping("/produtos/add")
     public ModelAndView add(Produto produto) {
  
-        ModelAndView mv = new ModelAndView("/produtos/cadastroproduto");
+        ModelAndView mv = new ModelAndView("produtos/cadastroproduto");
         mv.addObject("produto", produto);
 
         return mv;
@@ -66,7 +66,7 @@ public class ProdutoController {
          
     	Produto produto = service.findOne(id_produto );
 		
-		ModelAndView modelAndView = new ModelAndView("/produtos/cadastroproduto");
+		ModelAndView modelAndView = new ModelAndView("produtos/cadastroproduto");
 		modelAndView.addObject("produto", produto);
 		
 		return modelAndView;
@@ -86,7 +86,7 @@ public class ProdutoController {
         
         if(validacao.hasErrors()) {
             //return add(produto);
-            return new ModelAndView("/produtos/cadastroproduto");
+            return new ModelAndView("produtos/cadastroproduto");
         }
          
         service.save(produto);

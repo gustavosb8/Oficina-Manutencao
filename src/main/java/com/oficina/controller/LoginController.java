@@ -19,7 +19,7 @@ public class LoginController {
 	
 	@PostMapping("/login")
 	public ModelAndView logado() {
-		ModelAndView mv = new ModelAndView("/veiculos/controleveiculo");
+		ModelAndView mv = new ModelAndView("veiculos/controleveiculo");
 		return mv;
 	}
 }

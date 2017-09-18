@@ -45,7 +45,7 @@ public class ManutencaoProdutoController {
     public ModelAndView findAll() {
          
 	 /********************ALTERAR*******************************/
-        ModelAndView mv = new ModelAndView("/manutencaoprodutos/controlemanutencaoproduto");
+        ModelAndView mv = new ModelAndView("manutencaoprodutos/controlemanutencaoproduto");
         List<ManutencaoProduto> manutencaoProdutos = service.findAll();
         System.out.println("***** " + manutencaoProdutos );
         
@@ -57,7 +57,7 @@ public class ManutencaoProdutoController {
 	@GetMapping("/manutencaoprodutos/add")
     public ModelAndView add(ManutencaoProduto manutencaoproduto) {
          
-        ModelAndView mv = new ModelAndView("/manutencaoprodutos/cadastromanutencaoproduto");
+        ModelAndView mv = new ModelAndView("manutencaoprodutos/cadastromanutencaoproduto");
         mv.addObject("manutencaoProduto", manutencaoproduto);
         System.out.println("##################################"+manutencaoproduto);
          
@@ -90,7 +90,7 @@ public class ManutencaoProdutoController {
          
     	ManutencaoProduto manutencaoProduto = service.findOne(id);
 		
-		ModelAndView modelAndView = new ModelAndView("/manutencaoprodutos/cadastromanutencaoproduto");
+		ModelAndView modelAndView = new ModelAndView("manutencaoprodutos/cadastromanutencaoproduto");
 		modelAndView.addObject("manutencaoProduto", manutencaoProduto);
 		
 		return modelAndView;
@@ -113,7 +113,7 @@ public class ManutencaoProdutoController {
         
         if(validacao.hasErrors()) {
             //return add(manutencaoService);
-            return new ModelAndView("/manutencaoprodutos/cadastromanutencaoproduto");
+            return new ModelAndView("manutencaoprodutos/cadastromanutencaoproduto");
         }
         
         Manutencao manutencao = manutencaoService.findOne(idManutencao);

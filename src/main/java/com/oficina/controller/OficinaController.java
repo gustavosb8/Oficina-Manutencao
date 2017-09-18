@@ -34,7 +34,7 @@ public class OficinaController {
     public ModelAndView findAll() {
          
 	 /********************ALTERAR*******************************/
-        ModelAndView mv = new ModelAndView("/oficinas/controleoficina");
+        ModelAndView mv = new ModelAndView("oficinas/controleoficina");
         List<Oficina> oficinas = service.findAll();
         System.out.println("***** " + oficinas );
         
@@ -46,7 +46,7 @@ public class OficinaController {
 	@GetMapping("/oficinas/add")
     public ModelAndView add(Oficina oficina) {
          
-        ModelAndView mv = new ModelAndView("/oficinas/cadastrooficina");
+        ModelAndView mv = new ModelAndView("oficinas/cadastrooficina");
         mv.addObject("oficina", oficina);
          
         return mv;
@@ -64,7 +64,7 @@ public class OficinaController {
          
 		Oficina oficina = service.findOne(id_oficina);
 		
-		ModelAndView modelAndView = new ModelAndView("/oficinas/cadastrooficina");
+		ModelAndView modelAndView = new ModelAndView("oficinas/cadastrooficina");
 		modelAndView.addObject("oficina", oficina);
 		
 		return modelAndView;
@@ -85,7 +85,7 @@ public class OficinaController {
         
         if(validacao.hasErrors()) {
             //return add(Oficina);
-            return new ModelAndView("/oficinas/cadastrooficina");
+            return new ModelAndView("oficinas/cadastrooficina");
         }
         
         Montadora montadora = montadoraService.findOne(idMontadora);

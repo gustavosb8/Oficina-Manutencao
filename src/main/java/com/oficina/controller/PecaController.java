@@ -33,7 +33,7 @@ public class PecaController {
     @GetMapping("/pecas")
     public ModelAndView findAll() {
          
-        ModelAndView mv = new ModelAndView("/pecas/controlepeca");
+        ModelAndView mv = new ModelAndView("pecas/controlepeca");
         List<Peca> pecas = service.findAll();
         /*System.out.println("***** " + pecas );*/
         
@@ -46,7 +46,7 @@ public class PecaController {
     @GetMapping("/pecas/add")
     public ModelAndView add(Peca peca) {
  
-        ModelAndView mv = new ModelAndView("/pecas/cadastropeca");
+        ModelAndView mv = new ModelAndView("pecas/cadastropeca");
         mv.addObject("peca", peca);
 
         return mv;
@@ -64,7 +64,7 @@ public class PecaController {
          
     	Peca peca = service.findOne(id_peca );
 		
-		ModelAndView modelAndView = new ModelAndView("/pecas/cadastropeca");
+		ModelAndView modelAndView = new ModelAndView("pecas/cadastropeca");
 		modelAndView.addObject("peca", peca);
 		
 		return modelAndView;
@@ -84,7 +84,7 @@ public class PecaController {
         
         if(validacao.hasErrors()) {
             //return add(peca);
-            return new ModelAndView("/pecas/cadastropeca");
+            return new ModelAndView("pecas/cadastropeca");
         }
         
         service.save(peca);

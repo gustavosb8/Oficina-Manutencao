@@ -27,7 +27,7 @@ public class MontadoraController {
 	@GetMapping("/montadoras")
     public ModelAndView findAll() {
 		
-        ModelAndView mv = new ModelAndView("/montadoras/controlemontadora");
+        ModelAndView mv = new ModelAndView("montadoras/controlemontadora");
         List<Montadora> montadoras = service.findAll();
         System.out.println("***** " + montadoras );
         
@@ -39,7 +39,7 @@ public class MontadoraController {
 	@GetMapping("/montadoras/add")
     public ModelAndView add(Montadora montadora) {
          
-        ModelAndView mv = new ModelAndView("/montadoras/cadastromontadora");
+        ModelAndView mv = new ModelAndView("montadoras/cadastromontadora");
         mv.addObject("montadoras", montadora);
          
         return mv;
@@ -50,7 +50,7 @@ public class MontadoraController {
          
     	Montadora montadora = service.findOne(id_montadora);
 		
-		ModelAndView modelAndView = new ModelAndView("/montadoras/cadastromontadora");
+		ModelAndView modelAndView = new ModelAndView("montadoras/cadastromontadora");
 		modelAndView.addObject("montadora", montadora);
 		
 		return modelAndView;
@@ -70,7 +70,7 @@ public class MontadoraController {
         
         if(validacao.hasErrors()) {
             //return add(montadora);
-            return new ModelAndView("/montadoras/cadastromontadora");
+            return new ModelAndView("montadoras/cadastromontadora");
         }
 
         service.save(montadora);

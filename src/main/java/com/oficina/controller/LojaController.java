@@ -34,7 +34,7 @@ public class LojaController {
     public ModelAndView findAll() {
          
 	 /********************ALTERAR*******************************/
-        ModelAndView mv = new ModelAndView("/lojas/controleloja");
+        ModelAndView mv = new ModelAndView("lojas/controleloja");
         List<Loja> lojas = service.findAll();
         System.out.println("***** " + lojas );
         
@@ -46,7 +46,7 @@ public class LojaController {
 	@GetMapping("/lojas/add")
     public ModelAndView add(Loja loja) {
          
-        ModelAndView mv = new ModelAndView("/lojas/cadastroloja");
+        ModelAndView mv = new ModelAndView("lojas/cadastroloja");
         mv.addObject("lojas", loja);
          
         return mv;
@@ -64,7 +64,7 @@ public class LojaController {
          
     	Loja loja = service.findOne(id_loja);
 		
-		ModelAndView modelAndView = new ModelAndView("/lojas/cadastroloja");
+		ModelAndView modelAndView = new ModelAndView("lojas/cadastroloja");
 		modelAndView.addObject("loja", loja);
 		
 		return modelAndView;
@@ -86,7 +86,7 @@ public class LojaController {
         
         if(validacao.hasErrors()) {
             //return add(loja);
-            return new ModelAndView("/lojas/cadastroloja");
+            return new ModelAndView("lojas/cadastroloja");
         }
         
         
