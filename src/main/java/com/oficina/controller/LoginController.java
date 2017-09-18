@@ -12,8 +12,9 @@ public class LoginController {
 	
 	
 	@GetMapping("/login")
-	public String logarNoSistema() {
-		return "index";
+	public ModelAndView logarNoSistema() {
+		ModelAndView mv = new ModelAndView("/index");
+		return mv;
 	}
 	
 	@PostMapping("/login")

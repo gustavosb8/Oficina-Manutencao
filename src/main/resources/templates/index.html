@@ -31,18 +31,18 @@
 	            </div> 
 	            
 	            <div class="text-center">
-					<div th:if="${#bools.isTrue(param.login)}" class="bg-info" 
+					<div th:if="${#bools.isTrue(param.login)}" class="alert alert-info" 
 	             		role="alert" style="margin-top:1.5rem">Usuário ou Senha Inválida</div>
     			</div>
 	            
 	            <div class="text-center">
-					<div th:if="${#bools.isTrue(param.error)}" class="bg-danger" 
+					<div th:if="${#bools.isTrue(param.error)}" class="alert alert-danger" 
 	             		role="alert" style="margin-top:1.5rem">Usuário ou Senha Inválida</div>
     			</div>
     			
     			<div class="text-center">
     				
-	        		<div th:if="${#bools.isTrue(param.logout)}" class="bg-info" 
+	        		<div th:if="${#bools.isTrue(param.logout)}" class="alert alert-info" 
 	             		role="alert" style="margin-top:1.5rem">Logout realizado com sucesso</div>
 				</div>
 	        
@@ -84,18 +84,22 @@
 									</button>
 								</a>
 								
-								<a th:href="@{/veiculos}">
-									
-									<button type="button" class="btn btn-primary btn-lg login-button ">
-										Principal
-									</button>
-								</a>
+								
 							</div>
 							
 							
 							
 							
 						</form>
+						
+						<div class="form-group text-right ">
+						<a th:href="@{/veiculos}">
+									
+									<button type="button" class="btn btn-primary btn-lg login-button ">
+										Principal
+									</button>
+								</a>
+						</div>
 					</div>
 				</fieldset>
 			
