@@ -39,7 +39,7 @@ public class VeiculoController {
     @GetMapping("/veiculos")
     public ModelAndView findAll() {
          
-        ModelAndView mv = new ModelAndView("/veiculos/controleveiculo");
+        ModelAndView mv = new ModelAndView("/veiculos/controleveiculo.html");
         List<Veiculo> veiculos = service.findAll();
         /*System.out.println("***** " + veiculos );*/
         
@@ -54,7 +54,7 @@ public class VeiculoController {
     @GetMapping("/veiculos/add")
     public ModelAndView add(Veiculo veiculo) {
  
-        ModelAndView mv = new ModelAndView("/veiculos/cadastroveiculo");
+        ModelAndView mv = new ModelAndView("/veiculos/cadastroveiculo.html");
         mv.addObject("veiculos", veiculo);
 
         return mv;
@@ -79,7 +79,7 @@ public class VeiculoController {
          
     	Veiculo veiculo = service.findOne(id_renavam );
 		
-		ModelAndView modelAndView = new ModelAndView("/veiculos/cadastroveiculo");
+		ModelAndView modelAndView = new ModelAndView("/veiculos/cadastroveiculo.html");
 		modelAndView.addObject("veiculo", veiculo);
 		
 		return modelAndView;
@@ -101,7 +101,7 @@ public class VeiculoController {
         
         if(validacao.hasErrors()) {
             
-        	return new ModelAndView("/veiculos/cadastroveiculo");
+        	return new ModelAndView("/veiculos/cadastroveiculo.html");
         }
         
         Modelo modelo = modeloService.findOne(idModelo);
