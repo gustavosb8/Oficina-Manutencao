@@ -29,7 +29,7 @@ public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
 		    
 		    //.antMatchers("/login/").permitAll()
 		    //.anyRequest().hasRole("ADMIN")
-			.antMatchers("/resources/static/**","/css/**","/js/**","/img/**","/webjars/**").permitAll()
+			.antMatchers("/resources/**","/resources/static/**","/css/**","/js/**","/img/**","/webjars/**").permitAll()
 
 			.antMatchers("/Relatorios/**").hasRole("ADMIN")
 		    // libera os arquivos estáticos
