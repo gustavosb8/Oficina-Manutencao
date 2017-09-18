@@ -46,7 +46,6 @@ public class Veiculo implements Serializable{
 	@Column(name = "DS_OBS")
 	private String observacao;
 	
-	@NotNull
 	@DateTimeFormat(iso=ISO.DATE)
 	@Column(name = "DT_COMPRA")
 	private Date dataCompra;
@@ -58,8 +57,7 @@ public class Veiculo implements Serializable{
 	@NotNull
 	@Column(name = "VL_KM_COMPRA")
 	private int kilometragemCompra;
-	
-	@NotNull
+
 	@DateTimeFormat(iso=ISO.DATE)
 	@Column(name = "DT_VENDA")
 	private Date dataVenda;
