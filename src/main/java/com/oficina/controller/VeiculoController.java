@@ -39,7 +39,7 @@ public class VeiculoController {
     @GetMapping("/veiculos")
     public ModelAndView findAll() {
          
-        ModelAndView mv = new ModelAndView("/veiculos/controleveiculo");
+        ModelAndView mv = new ModelAndView("veiculos/controleveiculo");
         List<Veiculo> veiculos = service.findAll();
         /*System.out.println("***** " + veiculos );*/
         
