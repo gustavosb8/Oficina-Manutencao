@@ -31,13 +31,18 @@
 	            </div> 
 	            
 	            <div class="text-center">
-					<div th:if="${#bools.isTrue(param.error)}" class="alert alert-danger" 
+					<div th:if="${#bools.isTrue(param.login)}" class="bg-info" 
+	             		role="alert" style="margin-top:1.5rem">Usuário ou Senha Inválida</div>
+    			</div>
+	            
+	            <div class="text-center">
+					<div th:if="${#bools.isTrue(param.error)}" class="bg-danger" 
 	             		role="alert" style="margin-top:1.5rem">Usuário ou Senha Inválida</div>
     			</div>
     			
     			<div class="text-center">
     				
-	        		<div th:if="${#bools.isTrue(param.logout)}" class="alert alert-info" 
+	        		<div th:if="${#bools.isTrue(param.logout)}" class="bg-info" 
 	             		role="alert" style="margin-top:1.5rem">Logout realizado com sucesso</div>
 				</div>
 	        
