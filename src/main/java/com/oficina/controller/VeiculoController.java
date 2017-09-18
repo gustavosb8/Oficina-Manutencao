@@ -36,7 +36,7 @@ public class VeiculoController {
 	@Autowired
     private LojaService lojaService;
 	
-    @GetMapping("/veiculos")
+    @GetMapping("veiculos")
     public ModelAndView findAll() {
          
         ModelAndView mv = new ModelAndView("/veiculos/controleveiculo");
