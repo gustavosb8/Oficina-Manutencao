@@ -17,9 +17,9 @@ YjQ2N2QyNTs=]]>
 		</conditionalStyle>
 	</style>
 	<queryString language="SQL">
-		<![CDATA[SELECT bd_oficina.peca.id_peca AS ID,
-	bd_oficina.peca.ds_peca AS NOME
-FROM bd_oficina.peca]]>
+		<![CDATA[SELECT heroku_fa3e0d6879b26f7.peca.id_peca AS ID,
+	heroku_fa3e0d6879b26f7.peca.ds_peca AS NOME
+FROM heroku_fa3e0d6879b26f7.peca]]>
 	</queryString>
 	<field name="ID" class="java.lang.String"/>
 	<field name="NOME" class="java.lang.String"/>
