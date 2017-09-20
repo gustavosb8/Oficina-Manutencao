@@ -72,7 +72,7 @@ function preecheTabela(lista, tbody) {
 
 $(document).ready(function () {
 
-    $.getJSON("http://oficina-manutencao.herokuapp.com/health", function (lista) {
+    $.getJSON("https://oficina-manutencao.herokuapp.com/health", function (lista) {
 
         var tbody = $("#tbody");
 
