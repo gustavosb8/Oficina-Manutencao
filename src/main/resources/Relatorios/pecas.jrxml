@@ -6,11 +6,11 @@
 YjQ2N2QyNTs=]]>
 	</property>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
-	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
-	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
-	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
-	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+	<style name="Title" forecolor="#FFFFFF" fontName="SansSerif" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="SansSerif" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="SansSerif"/>
+	<style name="Row" mode="Transparent" fontName="SansSerif" pdfFontName="Helvetica">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
 			<style mode="Opaque" backcolor="#F0EFEF"/>
