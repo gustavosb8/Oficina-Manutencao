@@ -33,6 +33,8 @@ public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
 			
 			.antMatchers("/Relatorios/**").hasRole("ADMIN")
 			
+			.antMatchers("/atuador/atuador").hasRole("ACTUATOR")
+			
 		    // libera os arquivos estáticos
 		    //.antMatchers("/resources/static/**").permitAll()
 			.antMatchers().denyAll()
